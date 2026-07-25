@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software 2.1 — Excel for Structural Engineers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1319;
+    --card:#141C25;
+    --card-head:#1B2733;
+    --ink:#F2F5F8;
+    --ink-soft:#C7D3DE;
+    --accent:#F2C14E;      /* طلایی — رنگ شاخه‌ی 2.1 در Roadmap */
+    --steel:#7CC7F0;
+    --gold:#FF7A5C;
+    --green:#7ADFA0;
+    --purple:#C9A6F5;
+    --line:#2A3945;
+    --code-bg:#0F2233;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;font-weight:500;line-height:2.1;
+    padding:20px 12px 70px;text-align:right;
+  }
+  code{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--code-bg);border:1px solid #2E4A63;border-radius:5px;
+    padding:1px 7px;font-size:.82em;font-weight:600;color:var(--steel);white-space:nowrap;
+  }
+  .en{
+    display:block;direction:ltr;text-align:left;unicode-bidi:isolate;
+    background:var(--code-bg);border:1px solid #2E4A63;
+    border-inline-start:3px solid var(--steel);border-radius:8px;
+    padding:8px 14px;margin:8px 0 12px;
+    font-size:.92rem;font-weight:600;color:#E6F2FA;line-height:1.9;
+    font-family:'IBM Plex Mono',monospace;
+    overflow-x:auto;
+  }
+  .en code{background:#16324A;border-color:#3A5E7E;}
+  .wrap{max-width:860px;margin:0 auto;}
+  header{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:28px 26px;margin-bottom:26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;
+    font-size:.7rem;font-weight:600;letter-spacing:.14em;
+    color:var(--accent);margin-bottom:12px;
+  }
+  h1{font-size:1.5rem;font-weight:900;line-height:1.9;color:#FFF;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .subtitle{color:var(--ink-soft);font-size:.95rem;margin-top:8px;}
+  .toc{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 22px;margin-bottom:26px;
+  }
+  .toc-title{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;
+    font-size:.72rem;font-weight:700;letter-spacing:.12em;
+    color:var(--accent);margin-bottom:12px;
+  }
+  .toc ul{list-style:none;}
+  .toc li{position:relative;padding:6px 24px 6px 0;font-size:.9rem;border-bottom:1px dashed var(--line);}
+  .toc li:last-child{border-bottom:none;}
+  .toc li::before{content:"↳";position:absolute;right:0;top:6px;color:var(--accent);font-size:.85rem;}
+  .toc a{color:var(--ink-soft);text-decoration:none;font-weight:700;}
+  .toc a:hover{color:var(--steel);}
+  .toc a .lbl{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    color:var(--steel);font-size:.78rem;margin-inline-end:8px;
+  }
+  .lesson{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    margin-bottom:26px;overflow:hidden;scroll-margin-top:16px;
+  }
+  .lesson-head{
+    background:var(--card-head);border-bottom:2px solid var(--accent);
+    padding:14px 22px;
+  }
+  .lnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--accent);color:#101820;font-weight:700;font-size:.78rem;
+    padding:2px 10px;border-radius:6px;margin-inline-end:10px;
+    display:inline-block;vertical-align:2px;
+  }
+  h2{font-size:1.1rem;font-weight:800;color:#FFF;display:inline;line-height:2;}
+  .lesson-body{padding:22px;}
+  h3{
+    font-size:1rem;font-weight:800;color:var(--green);
+    margin:26px 0 12px;padding-bottom:7px;border-bottom:1px dashed var(--line);
+  }
+  h3 .mark{color:var(--green);font-size:.75rem;margin-inline-end:8px;}
+  .lesson-body h3:first-of-type{margin-top:0;}
+  p{margin-bottom:12px;font-size:.94rem;color:var(--ink-soft);}
+  p b, li b{color:var(--ink);font-weight:800;}
+  ul.pts{list-style:none;margin:0 0 14px;}
+  ul.pts li{position:relative;padding:5px 22px 5px 0;font-size:.92rem;color:var(--ink-soft);}
+  ul.pts li::before{content:"▸";position:absolute;right:0;top:5px;color:var(--accent);font-size:.8rem;}
+  ol.steps{list-style:none;counter-reset:st;margin:6px 0 14px;}
+  ol.steps li{
+    position:relative;counter-increment:st;
+    padding:8px 40px 8px 0;font-size:.92rem;color:var(--ink-soft);
+    border-bottom:1px dashed var(--line);
+  }
+  ol.steps li:last-child{border-bottom:none;}
+  ol.steps li::before{
+    content:counter(st,decimal-leading-zero);
+    position:absolute;right:0;top:8px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--card-head);color:var(--steel);
+    border:1px solid var(--line);border-radius:6px;
+    font-size:.72rem;font-weight:700;padding:1px 7px;
+  }
+  .keybox{
+    background:rgba(242,193,78,.07);border:1.5px solid var(--accent);
+    border-radius:12px;padding:14px 18px;margin:16px 0;
+  }
+  .keybox-title{font-weight:900;color:var(--accent);font-size:.9rem;margin-bottom:6px;}
+  .keybox p{margin-bottom:6px;font-size:.9rem;}
+  .keybox p:last-child{margin-bottom:0;}
+  .example{
+    background:rgba(124,199,240,.06);border:1.5px solid var(--steel);
+    border-radius:12px;padding:15px 18px;margin:16px 0;
+  }
+  .example-title{font-weight:900;color:var(--steel);font-size:.9rem;margin-bottom:8px;}
+  .example p{font-size:.9rem;margin-bottom:8px;}
+  .example p:last-child{margin-bottom:0;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.87rem;}
+  th{background:var(--card-head);color:var(--steel);font-weight:800;padding:8px 12px;border:1px solid var(--line);text-align:right;}
+  td{padding:8px 12px;border:1px solid var(--line);color:var(--ink-soft);}
+  td code{white-space:normal;}
+  .deliver{
+    background:rgba(122,223,160,.07);border:1.5px solid var(--green);
+    border-radius:12px;padding:16px 20px;margin:14px 0;
+  }
+  .deliver-title{font-size:.95rem;font-weight:900;color:var(--green);margin-bottom:10px;}
+  .deliver p{font-size:.9rem;}
+  .deliver ol{padding-inline-start:22px;font-size:.9rem;color:var(--ink-soft);}
+  .deliver ol li{margin-bottom:8px;}
+  .skipbox{
+    background:rgba(255,122,92,.06);border:1.5px solid var(--gold);
+    border-radius:12px;padding:14px 18px;margin:16px 0;
+  }
+  .skipbox-title{font-weight:900;color:var(--gold);font-size:.9rem;margin-bottom:8px;}
+  .skipbox ul{list-style:none;margin:0;}
+  .skipbox li{position:relative;padding:4px 24px 4px 0;font-size:.9rem;color:var(--ink-soft);}
+  .skipbox li::before{content:"✕";position:absolute;right:0;top:4px;color:var(--gold);font-weight:800;font-size:.82rem;}
+  .res{
+    background:rgba(201,166,245,.07);border:1.5px solid var(--purple);
+    border-radius:12px;padding:14px 18px;margin:18px 0;
+  }
+  .res-title{font-weight:900;color:var(--purple);font-size:.9rem;margin-bottom:8px;}
+  .res ul{list-style:none;margin:0;}
+  .res li{position:relative;padding:6px 26px 6px 0;font-size:.88rem;color:var(--ink-soft);border-bottom:1px dashed var(--line);}
+  .res li:last-of-type{border-bottom:none;}
+  .res li::before{position:absolute;right:0;top:6px;font-size:.85rem;}
+  .res li.v::before{content:"🎥";}
+  .res li.w::before{content:"🔗";}
+  .res a{color:var(--steel);text-decoration:none;font-weight:700;border-bottom:1px dotted var(--steel);}
+  .res a:hover{color:var(--accent);border-color:var(--accent);}
+  .res .tip{font-size:.8rem;color:#93A6B6;margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);}
+  footer{
+    text-align:center;margin-top:28px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    font-size:.68rem;font-weight:600;letter-spacing:.14em;color:#5A6C7C;
+  }
+  @media(max-width:600px){
+    body{font-size:15px;padding:14px 8px 60px;}
+    header{padding:20px 16px;}
+    .lesson-body{padding:18px 14px;}
+    h1{font-size:1.3rem;}
+    h2{font-size:1.02rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">SOFTWARE FILE · BRANCH 2.1 · EXCEL · PARALLEL TRACK</div>
+  <h1><em>Software 2.1</em> — Excel for Structural Engineers</h1>
+  <p class="subtitle">شاخه‌ی موازی مسیر ۲: از روز اول شروع می‌شود و تا انتها ادامه دارد. هدف نهایی: ساختن <code>Design Spreadsheets</code> واقعی — همان چیزی که یک <code>Graduate</code> در دفتر <code>UK</code> بیشتر از هر نرم‌افزار دیگری با آن کار می‌کند.</p>
+</header>
+
+<nav class="toc">
+  <div class="toc-title">CONTENTS</div>
+  <ul>
+    <li><a href="#e1"><span class="lbl">1</span> چرا Excel جاده است، نه ایستگاه؟</a></li>
+    <li><a href="#e2"><span class="lbl">2</span> مرحله‌ی اول — مبانی: References و توابع پایه</a></li>
+    <li><a href="#e3"><span class="lbl">3</span> مرحله‌ی دوم — توابع طراحی: Lookup و Validation</a></li>
+    <li><a href="#e4"><span class="lbl">4</span> مرحله‌ی سوم — ساختن یک Design Spreadsheet</a></li>
+    <li><a href="#e5"><span class="lbl">5</span> ارائه‌ی حرفه‌ای: Charts, Print &amp; Protection</a></li>
+    <li><a href="#e6"><span class="lbl">6</span> جمع‌بندی، تمرین عملی و Quiz</a></li>
+  </ul>
+</nav>
+
+<!-- ================= 1 ================= -->
+<section class="lesson" id="e1">
+  <div class="lesson-head"><span class="lnum">1</span><h2>چرا Excel جاده است، نه ایستگاه؟</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>1.1 — Excel در دفتر واقعاً برای چه استفاده می‌شود؟</h3>
+    <p>بگذار تصویر واقعی بدهم. یک <code>Graduate Structural Engineer</code> در <code>UK</code> با <code>Excel</code> این کارها را می‌کند:</p>
+    <ul class="pts">
+      <li><b><code>Design Spreadsheets</code>:</b> برگه‌های محاسباتی آماده‌ی شرکت — ورودی می‌دهی، چک طبق <code>Eurocode</code> انجام می‌شود، <code>Pass/Fail</code> می‌گیری.</li>
+      <li><b><code>Load Takedown</code>:</b> جمع کردن بار طبقه‌به‌طبقه تا پی — کلاسیک‌ترین کار <code>Excel</code> ی یک <code>Graduate</code>.</li>
+      <li><b><code>Schedules</code>:</b> جدول اعضا، مقادیر، وزن فولاد.</li>
+      <li><b>چک کردن خروجی نرم‌افزار:</b> عدد <code>TSD</code> را با یک محاسبه‌ی سریع <code>Excel</code> ی می‌سنجی.</li>
+    </ul>
+
+    <div class="keybox">
+      <div class="keybox-title">⚠️ قانون این شاخه</div>
+      <p><code>Excel</code> را جدا از مهندسی یاد نگیر. هر تابع را با یک مثال سازه‌ای تمرین کن. به همین دلیل تمرین‌های این فایل همه از دل <code>TB-01</code> و درس‌های مسیر ۱ درمی‌آیند — واژه‌نامه‌ی نقشه‌خوانی، جدول مقاطع، <code>Load Takedown</code>.</p>
+    </div>
+
+    <h3><span class="mark">◆</span>1.2 — سه مرحله، موازی با بقیه‌ی مسیر</h3>
+    <table>
+      <tr><th>مرحله</th><th>موضوع</th><th>هم‌زمان با</th></tr>
+      <tr><td>اول</td><td>مبانی: <code>References</code>، توابع پایه</td><td>ایستگاه <code>S0 — Drawing Reading</code></td></tr>
+      <tr><td>دوم</td><td><code>Lookup</code>، <code>Validation</code>، <code>Formatting</code></td><td>ایستگاه‌های <code>S1</code> و <code>S2</code></td></tr>
+      <tr><td>سوم</td><td><code>Design Spreadsheet</code> کامل</td><td>ایستگاه‌های <code>S3</code>، <code>S4</code> و <code>P6</code> مسیر ۱</td></tr>
+    </table>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 1</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+for+engineers+introduction" target="_blank">Excel for Engineers — Introduction</a><br>دید کلی از کاربرد مهندسی <code>Excel</code>.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="lesson" id="e2">
+  <div class="lesson-head"><span class="lnum">2</span><h2>مرحله‌ی اول — مبانی: References و توابع پایه</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>2.1 — Relative vs Absolute References: مهم‌ترین مفهوم پایه</h3>
+    <p>وقتی فرمولی را کپی می‌کنی، آدرس سلول‌ها با آن «حرکت می‌کنند» — مگر اینکه قفلشان کنی. علامت قفل، <code>$</code> است:</p>
+    <table>
+      <tr><th>نوشتار</th><th>نوع</th><th>وقتی کپی شود</th></tr>
+      <tr><td><code>A1</code></td><td><code>Relative</code></td><td>هم سطر و هم ستون حرکت می‌کند</td></tr>
+      <tr><td><code>$A$1</code></td><td><code>Absolute</code></td><td>کاملاً قفل — هیچ‌چیز حرکت نمی‌کند</td></tr>
+      <tr><td><code>$A1</code> یا <code>A$1</code></td><td><code>Mixed</code></td><td>فقط ستون یا فقط سطر قفل است</td></tr>
+    </table>
+
+    <div class="example">
+      <div class="example-title">📐 مثال سازه‌ای</div>
+      <p>در یک <code>Load Takedown</code>، بار سطحی <code>Imposed Load = 2.5 kN/m²</code> را یک بار در سلول <code>$B$2</code> می‌نویسی. بعد در ستون محاسبات، هر طبقه مساحتش را در همان <code>$B$2</code> ضرب می‌کند:</p>
+      <span class="en">= C5 * $B$2</span>
+      <p>حالا فرمول را برای همه‌ی طبقات پایین می‌کشی — <code>C5</code> حرکت می‌کند (<code>C6, C7, ...</code>) ولی <code>$B$2</code> ثابت می‌ماند. اگر فردا بار عوض شد، فقط یک سلول را عوض می‌کنی و کل برگه به‌روز می‌شود. این «یک ورودی، یک جا» اساس هر <code>Design Sheet</code> خوب است.</p>
+    </div>
+
+    <h3><span class="mark">◆</span>2.2 — Named Ranges: فرمول‌هایی که خوانده می‌شوند</h3>
+    <p>به‌جای <code>$B$2</code> می‌توانی به سلول اسم بدهی — مثلاً <code>q_k</code>. آن‌وقت فرمول این می‌شود:</p>
+    <span class="en">= Area * q_k</span>
+    <p>این فرمول را شش ماه بعد هم می‌فهمی — و مهم‌تر: <code>Checker</code> هم می‌فهمد. در دفتر، برگه‌ای که فرمول‌هایش خوانا نباشد، اعتماد نمی‌گیرد.</p>
+
+    <h3><span class="mark">◆</span>2.3 — توابع پایه‌ای که هر روز لازم داری</h3>
+    <table>
+      <tr><th>تابع</th><th>کارش</th><th>مثال سازه‌ای</th></tr>
+      <tr><td><code>IF</code></td><td>شرط</td><td><code>=IF(UR&lt;=1, "PASS", "FAIL")</code></td></tr>
+      <tr><td><code>AND / OR</code></td><td>چند شرط با هم</td><td>هم <code>Bending</code> و هم <code>Shear</code> باید <code>Pass</code> باشند</td></tr>
+      <tr><td><code>MAX / MIN</code></td><td>بیشینه / کمینه</td><td>بحرانی‌ترین <code>Load Combination</code></td></tr>
+      <tr><td><code>SUM</code></td><td>جمع</td><td>جمع بار طبقات روی ستون</td></tr>
+      <tr><td><code>ROUND / ROUNDUP</code></td><td>گرد کردن</td><td>تعداد میلگرد را همیشه <b>بالا</b> گرد کن: <code>ROUNDUP</code></td></tr>
+      <tr><td><code>SQRT / ^</code></td><td>ریشه / توان</td><td><code>=B2^2</code> برای مجذور</td></tr>
+      <tr><td><code>PI()</code></td><td>عدد π</td><td>سطح مقطع میلگرد: <code>=PI()*D^2/4</code></td></tr>
+    </table>
+
+    <div class="keybox">
+      <div class="keybox-title">⚠️ عادت طلایی: واحدها را بنویس</div>
+      <p>کنار هر ورودی و خروجی، واحدش را در سلول مجاور بنویس: <code>kN</code>، <code>kN/m²</code>، <code>mm</code>. نصف اشتباه‌های محاسباتی دفترها اشتباه واحد است — <code>N</code> به‌جای <code>kN</code> یعنی هزار برابر خطا. برگه‌ای که واحد ندارد، برگه‌ی مهندسی نیست.</p>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 2</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+absolute+relative+references+tutorial" target="_blank">Absolute vs Relative References</a><br>پایه‌ی همه‌چیز — اول این.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+named+ranges+tutorial" target="_blank">Named Ranges</a><br>فرمول‌های خوانا.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+if+and+or+functions+tutorial" target="_blank">IF, AND &amp; OR Functions</a><br>منطق <code>Pass/Fail</code>.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="lesson" id="e3">
+  <div class="lesson-head"><span class="lnum">3</span><h2>مرحله‌ی دوم — توابع طراحی: Lookup و Validation</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>3.1 — Lookup: قلب هر Design Sheet</h3>
+    <p>سناریوی واقعی: یک جدول <code>Section Properties</code> داری با همه‌ی مقاطع <code>UB</code> — اسم مقطع، <code>Depth</code>، <code>Width</code>، <code>W_pl</code> و بقیه. می‌خواهی کاربر اسم مقطع را انتخاب کند و برگه خودش مشخصاتش را بردارد. این کار <code>Lookup</code> است:</p>
+    <span class="en">= XLOOKUP( SectionName , SectionTable[Name] , SectionTable[Wpl] )</span>
+    <p>سه گزینه داری:</p>
+    <ul class="pts">
+      <li><b><code>XLOOKUP</code>:</b> جدیدترین و ساده‌ترین — اگر <code>Excel</code> جدید داری، همین را یاد بگیر.</li>
+      <li><b><code>INDEX + MATCH</code>:</b> روش کلاسیک و قابل‌اعتماد — در برگه‌های قدیمی شرکت‌ها همین را می‌بینی، پس باید بتوانی بخوانی‌اش.</li>
+      <li><b><code>VLOOKUP</code>:</b> قدیمی و محدود — بشناسش ولی برای کار جدید استفاده نکن.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>3.2 — Data Validation: Drop-down List</h3>
+    <p>حالا آن «انتخاب مقطع» را حرفه‌ای کن: با <code>Data Validation</code> یک <code>Drop-down List</code> بساز که کاربر فقط بتواند از فهرست مقاطع موجود انتخاب کند — نه اینکه دستی تایپ کند و اشتباه بنویسد.</p>
+    <ol class="steps">
+      <li>ستون اسم مقاطع را در جدول مرجع آماده کن.</li>
+      <li>سلول ورودی را انتخاب کن ← <code>Data ▸ Data Validation ▸ List</code>.</li>
+      <li>منبع فهرست را به آن ستون وصل کن.</li>
+      <li>حالا سلول یک فلش کوچک دارد و فقط مقاطع معتبر را می‌پذیرد.</li>
+    </ol>
+
+    <h3><span class="mark">◆</span>3.3 — Conditional Formatting: چراغ راهنمای برگه</h3>
+    <p>می‌خواهی وقتی <code>Utilisation Ratio</code> از <code>1.0</code> رد شد، سلول <b>خودش قرمز شود</b>. این کار <code>Conditional Formatting</code> است:</p>
+    <ul class="pts">
+      <li>قاعده‌ی <code>Cell Value &gt; 1</code> ← پس‌زمینه قرمز.</li>
+      <li>قاعده‌ی <code>Cell Value &lt;= 1</code> ← پس‌زمینه سبز.</li>
+      <li>برای هشدار زودهنگام: <code>0.9 – 1.0</code> ← زرد.</li>
+    </ul>
+    <p>نتیجه: یک نگاه به برگه کافی است تا اعضای <code>Fail</code> شده را ببینی — بدون خواندن تک‌تک اعداد.</p>
+
+    <div class="example">
+      <div class="example-title">📐 پروژه‌ی کوچک این مرحله</div>
+      <p>واژه‌نامه‌ای که در ایستگاه <code>S0</code> شروع کردی را ارتقا بده: یک <code>Sheet</code> جدید بساز با جدول <code>10</code> مقطع <code>UB</code> (اسم، <code>Depth</code>، <code>Mass/m</code>) — داده‌ها را از <code>SteelConstruction.info</code> بردار. بعد یک سلول با <code>Drop-down</code> بساز که مقطع را انتخاب کنی و <code>Depth</code> اش با <code>XLOOKUP</code> ظاهر شود. تبریک — این هسته‌ی اولین <code>Design Sheet</code> توست.</p>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 3</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+xlookup+tutorial" target="_blank">XLOOKUP Tutorial</a><br>روش جدید و اصلی.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+index+match+tutorial" target="_blank">INDEX + MATCH</a><br>روش کلاسیک — برای خواندن برگه‌های قدیمی شرکت.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+data+validation+drop+down+list+tutorial" target="_blank">Data Validation — Drop-down Lists</a><br>ورودی بدون خطا.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+conditional+formatting+tutorial" target="_blank">Conditional Formatting</a><br>چراغ <code>Pass/Fail</code>.</li>
+        <li class="w"><a href="https://www.steelconstruction.info/Section_properties" target="_blank">SteelConstruction.info — Section Properties</a><br>منبع داده‌ی جدول مقاطعت.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="lesson" id="e4">
+  <div class="lesson-head"><span class="lnum">4</span><h2>مرحله‌ی سوم — ساختن یک Design Spreadsheet</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>4.1 — آناتومی یک Design Sheet حرفه‌ای</h3>
+    <p>هر برگه‌ی طراحی خوب — در هر شرکتی — همین چهار بخش را دارد، به همین ترتیب:</p>
+    <table>
+      <tr><th>بخش</th><th>محتوا</th><th>قاعده</th></tr>
+      <tr><td><code>1 — Header</code></td><td><code>Project / Job No / Calc Title / By / Checked / Date / Rev</code></td><td>مثل <code>Title Block</code> نقشه — بدون این، برگه رسمی نیست</td></tr>
+      <tr><td><code>2 — Input</code></td><td>همه‌ی ورودی‌ها یک‌جا، با واحد، با رنگ مشخص (مرسوم: آبی)</td><td>کاربر فقط به این بخش دست می‌زند</td></tr>
+      <tr><td><code>3 — Calculation</code></td><td>محاسبات مرحله‌به‌مرحله + ارجاع به بند <code>Eurocode</code></td><td>هر خط باید قابل دنبال کردن باشد — نه یک فرمول غول‌پیکر</td></tr>
+      <tr><td><code>4 — Output</code></td><td>نتیجه‌ی نهایی + <code>Utilisation</code> + چراغ <code>PASS/FAIL</code></td><td>یک نگاه، یک جواب</td></tr>
+    </table>
+
+    <div class="keybox">
+      <div class="keybox-title">⚠️ مهم‌ترین اصل: قابل چک بودن</div>
+      <p>در دفتر، هر محاسبه‌ای را یک نفر دیگر <code>Check</code> می‌کند. برگه‌ای خوب است که <code>Checker</code> بتواند بدون توضیح تو، مسیرش را دنبال کند. یعنی: محاسبات شکسته در چند خط، ارجاع به بند آیین‌نامه کنار هر چک (مثلاً <code>EN 1993-1-1 Cl. 6.2.5</code>)، واحد کنار هر عدد. <b>برگه‌ی هوشمندِ غیرقابل‌فهم، بدتر از برگه‌ی ساده‌ی شفاف است.</b></p>
+    </div>
+
+    <h3><span class="mark">◆</span>4.2 — بسازیم: Load Takedown برای Column B2 ساختمان TB-01</h3>
+    <p>حالا همه‌چیز را جمع می‌کنیم. ستون <code>B2</code> (بحرانی‌ترین ستون <code>TB-01</code>) از هر طبقه چقدر بار می‌گیرد؟ ساختار برگه:</p>
+    <ol class="steps">
+      <li><b>بخش Input:</b> ابعاد <code>Grid (6.0 m × 6.0 m)</code>، بارهای سطحی هر تراز — <code>Dead (g_k)</code> و <code>Imposed (q_k)</code> بر حسب <code>kN/m²</code>. (اعداد دقیق را از <code>Phase 6</code> مسیر ۱ می‌گیری؛ فعلاً می‌توانی مقادیر فرضی معقول بگذاری.)</li>
+      <li><b>Tributary Area:</b> ستون میانی از هر طرف نصف دهانه بار می‌گیرد: <code>6.0 × 6.0 = 36 m²</code>. این را با فرمول بساز، نه دستی — تا با تغییر <code>Grid</code> خودش عوض شود.</li>
+      <li><b>جدول طبقه‌به‌طبقه:</b> یک سطر برای <code>Roof</code>، یک سطر برای <code>First Floor</code>. هر سطر: <code>Area × g_k</code> و <code>Area × q_k</code> جدا.</li>
+      <li><b>ستون تجمعی (<code>Cumulative</code>):</b> بار هر تراز + همه‌ی ترازهای بالاتر — این همان «انباشته شدن بار روی ستون همکف» است که در <code>Phase 0</code> خواندی.</li>
+      <li><b>بخش Output:</b> جمع <code>Dead</code> و <code>Imposed</code> در پای ستون، و بار طرح <code>ULS</code> با ترکیب <code>1.35 G + 1.5 Q</code> طبق <code>EN 1990</code>.</li>
+    </ol>
+    <span class="en">N_Ed = 1.35 × ΣG_k + 1.5 × ΣQ_k</span>
+
+    <div class="example">
+      <div class="example-title">📐 چک سلامت برگه</div>
+      <p>سه آزمایش که هر برگه‌ای باید پاس کند:</p>
+      <p>۱) یک ورودی را عوض کن — همه‌چیز باید خودکار به‌روز شود، هیچ عدد «دستی» وسط محاسبات نباشد. ۲) یک ورودی عمداً غلط بگذار (مثلاً بار منفی) — برگه باید داد بزند، نه ساکت جواب غلط بدهد. ۳) جواب نهایی را با یک حساب سرانگشتی روی کاغذ مقایسه کن — اختلاف بزرگ یعنی جایی خطاست.</p>
+    </div>
+
+    <div class="skipbox">
+      <div class="skipbox-title">در این شاخه لازم نداری</div>
+      <ul>
+        <li><code>VBA</code> و <code>Macros</code> — برگه‌های شرکتی مدرن بدون آن ساخته می‌شوند</li>
+        <li><code>Power Query</code> و <code>Power Pivot</code> — ابزار تحلیل داده، نه طراحی سازه</li>
+        <li><code>Pivot Tables</code> پیشرفته</li>
+        <li>نمودارهای پیچیده و <code>Dashboards</code></li>
+      </ul>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 4</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=engineering+calculation+spreadsheet+excel+structural+design" target="_blank">Structural Design Spreadsheets in Excel</a><br>نمونه‌های واقعی برگه‌ی مهندسی — ببین بقیه چطور می‌سازند.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=load+takedown+spreadsheet+excel+structural" target="_blank">Load Takedown in Excel</a><br>دقیقاً همان تمرین اصلی این مرحله.</li>
+      </ul>
+      <div class="tip">💡 اعداد دقیق بارها و ضرایب را در <code>Phase 6</code> مسیر ۱ یاد می‌گیری — اینجا «اسکلت برگه» را بساز، آنجا اعداد واقعی را در آن می‌ریزی.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="lesson" id="e5">
+  <div class="lesson-head"><span class="lnum">5</span><h2>ارائه‌ی حرفه‌ای: Charts, Print &amp; Protection</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>5.1 — Print Setup: برگه‌ای که PDF تمیز بدهد</h3>
+    <p>برگه‌ی محاسبات در نهایت به‌صورت <code>PDF</code> در <code>Calculation Package</code> می‌نشیند. پس باید درست چاپ شود:</p>
+    <ul class="pts">
+      <li><b><code>Print Area</code>:</b> فقط محدوده‌ی محاسبات — نه سلول‌های خالی اطراف.</li>
+      <li><b><code>Fit to 1 Page Wide</code>:</b> عرض همیشه در یک صفحه.</li>
+      <li><b><code>Headers / Footers</code>:</b> شماره‌ی صفحه و <code>Job No</code> در پایین هر برگ.</li>
+      <li><b><code>Gridlines</code>:</b> در نسخه‌ی چاپی معمولاً خاموش — جدول‌ها را با <code>Borders</code> خودت بکش.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>5.2 — Cell Protection: قفل فرمول‌ها</h3>
+    <p>برگه‌ات را به کسی می‌دهی و نمی‌خواهی تصادفاً فرمولی پاک شود:</p>
+    <ol class="steps">
+      <li>سلول‌های <b>ورودی</b> را انتخاب کن ← <code>Format Cells ▸ Protection ▸ Locked</code> را <b>بردار</b>.</li>
+      <li>حالا <code>Review ▸ Protect Sheet</code> را بزن.</li>
+      <li>نتیجه: فقط ورودی‌ها قابل تغییرند؛ محاسبات قفل‌اند. برگه‌های شرکتی همه همین‌طورند.</li>
+    </ol>
+
+    <h3><span class="mark">◆</span>5.3 — یک Chart ساده و مفید</h3>
+    <p>در حد نیازت: یک <code>Bar Chart</code> از بار تجمعی ستون در هر تراز — نشان می‌دهد بار چطور به سمت پایین «انباشته» می‌شود. برای <code>Portfolio</code> ات هم تصویری گویاست. بیشتر از این فعلاً لازم نیست.</p>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 5</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+print+setup+fit+to+page+tutorial" target="_blank">Print Setup &amp; Page Layout</a><br>خروجی <code>PDF</code> تمیز.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=excel+protect+sheet+lock+cells+tutorial" target="_blank">Protect Sheet &amp; Lock Cells</a><br>قفل کردن فرمول‌ها.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="lesson" id="e6">
+  <div class="lesson-head"><span class="lnum">6</span><h2>جمع‌بندی، تمرین عملی و Quiz</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>6.1 — نقشه‌ی زمانی این شاخه</h3>
+    <table>
+      <tr><th>مرحله</th><th>موضوع</th><th>زمان</th><th>هم‌زمان با</th></tr>
+      <tr><td>اول</td><td><code>References</code> + توابع پایه + واحدها</td><td><code>≈ 4 h</code></td><td><code>S0</code></td></tr>
+      <tr><td>دوم</td><td><code>Lookup</code> + <code>Validation</code> + <code>Formatting</code></td><td><code>≈ 5 h</code></td><td><code>S1 / S2</code></td></tr>
+      <tr><td>سوم</td><td><code>Design Spreadsheet</code> + ارائه</td><td><code>≈ 6–8 h</code></td><td><code>S3 / S4 / P6</code></td></tr>
+    </table>
+
+    <div class="deliver">
+      <div class="deliver-title">🛠 تمرین عملی — دو سند Portfolio</div>
+      <p><b>سند ۱ — TB-01 Load Takedown Spreadsheet:</b></p>
+      <ol>
+        <li>برگه را با آناتومی چهاربخشی بساز: <code>Header / Input / Calculation / Output</code>.</li>
+        <li><code>Tributary Area</code> ستون <code>B2</code> را با فرمول بساز.</li>
+        <li>جدول طبقه‌به‌طبقه با ستون تجمعی.</li>
+        <li>ترکیب <code>ULS: 1.35G + 1.5Q</code> در خروجی.</li>
+        <li>واحد کنار هر عدد + <code>Named Ranges</code> برای بارها.</li>
+      </ol>
+      <p><b>سند ۲ — Beam Check Sheet (نسخه‌ی اولیه):</b></p>
+      <ol>
+        <li>جدول <code>10</code> مقطع <code>UB</code> + انتخاب مقطع با <code>Drop-down</code> و <code>XLOOKUP</code>.</li>
+        <li>یک چک ساده (فعلاً حتی مقایسه‌ی <code>Applied vs Capacity</code> با عدد فرضی).</li>
+        <li>چراغ <code>PASS/FAIL</code> با <code>IF</code> + <code>Conditional Formatting</code>.</li>
+        <li>قفل فرمول‌ها + <code>Print Setup</code> + خروجی <code>PDF</code>.</li>
+      </ol>
+      <p class="out"><b>📁 خروجی:</b> 2 فایل <code>Excel</code> + نسخه‌ی <code>PDF</code> — وقتی در مسیر ۱ به <code>Phase 6</code> و <code>Phase 7</code> رسیدی، همین دو برگه را با اعداد و چک‌های واقعی کامل می‌کنی.</p>
+    </div>
+
+    <h3><span class="mark">◆</span>6.2 — Quiz</h3>
+    <div class="example">
+      <div class="example-title">📝 به این ۵ سؤال جواب بده</div>
+      <p><b>Q1.</b> فرق <code>A1</code> و <code>$A$1</code> چیست؟ در برگه‌ی <code>Load Takedown</code> کدام‌یک برای سلول «بار سطحی» درست است و چرا؟</p>
+      <p><b>Q2.</b> چرا <code>XLOOKUP</code> را یاد می‌گیری ولی باید بتوانی <code>INDEX+MATCH</code> را هم «بخوانی»؟</p>
+      <p><b>Q3.</b> چهار بخش آناتومی یک <code>Design Sheet</code> را به ترتیب نام ببر. کاربر به کدام بخش دست می‌زند؟</p>
+      <p><b>Q4.</b> «قابل چک بودن» یعنی چه و چرا از «هوشمند بودن» برگه مهم‌تر است؟</p>
+      <p><b>Q5.</b> در برگه‌ی <code>TB-01</code>، چرا بار ستون <code>B2</code> در <code>Ground Floor</code> از <code>First Floor</code> بیشتر است؟ (به درس <code>Load Path</code> در <code>Phase 0</code> برگرد.)</p>
+    </div>
+    <p>جواب‌ها را در چت بنویس تا با هم مرور کنیم.</p>
+
+    <div class="keybox">
+      <div class="keybox-title">✅ این شاخه کِی «تمام» می‌شود؟</div>
+      <p>هیچ‌وقت — و این نکته‌اش است. هر ایستگاه شاخه‌ی <code>2.2</code> و هر <code>Phase</code> مسیر ۱، یک تمرین <code>Excel</code> ی به این شاخه اضافه می‌کند: واژه‌نامه، جدول مقاطع، <code>Load Takedown</code>، <code>Design Sheets</code>، جدول مقایسه‌ی <code>Hand Calc vs TSD</code>. برگه‌هایت را در یک پوشه‌ی منظم نگه دار — این پوشه بخشی از <code>Portfolio</code> توست.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  SOFTWARE 2.1 · EXCEL · PARALLEL TRACK · RUNS ALONGSIDE S0 → S4 · TB-01
+</footer>
+
+</div>
+</body>
+</html>

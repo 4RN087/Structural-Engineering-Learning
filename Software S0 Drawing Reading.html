@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software S0 — Drawing Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1319;
+    --card:#141C25;
+    --card-head:#1B2733;
+    --ink:#F2F5F8;
+    --ink-soft:#C7D3DE;
+    --accent:#FF7A5C;
+    --steel:#7CC7F0;
+    --gold:#F2C14E;
+    --green:#7ADFA0;
+    --purple:#C9A6F5;
+    --line:#2A3945;
+    --code-bg:#0F2233;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;font-weight:500;line-height:2.1;
+    padding:20px 12px 70px;text-align:right;
+  }
+  code{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--code-bg);border:1px solid #2E4A63;border-radius:5px;
+    padding:1px 7px;font-size:.82em;font-weight:600;color:var(--steel);white-space:nowrap;
+  }
+  .en{
+    display:block;direction:ltr;text-align:left;unicode-bidi:isolate;
+    background:var(--code-bg);border:1px solid #2E4A63;
+    border-inline-start:3px solid var(--steel);border-radius:8px;
+    padding:8px 14px;margin:8px 0 12px;
+    font-size:.92rem;font-weight:600;color:#E6F2FA;line-height:1.9;
+  }
+  .en code{background:#16324A;border-color:#3A5E7E;}
+  .wrap{max-width:860px;margin:0 auto;}
+  header{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:28px 26px;margin-bottom:26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;
+    font-size:.7rem;font-weight:600;letter-spacing:.14em;
+    color:var(--accent);margin-bottom:12px;
+  }
+  h1{font-size:1.5rem;font-weight:900;line-height:1.9;color:#FFF;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .subtitle{color:var(--ink-soft);font-size:.95rem;margin-top:8px;}
+  .toc{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px 22px;margin-bottom:26px;
+  }
+  .toc-title{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;
+    font-size:.72rem;font-weight:700;letter-spacing:.12em;
+    color:var(--gold);margin-bottom:12px;
+  }
+  .toc ul{list-style:none;}
+  .toc li{position:relative;padding:6px 24px 6px 0;font-size:.9rem;border-bottom:1px dashed var(--line);}
+  .toc li:last-child{border-bottom:none;}
+  .toc li::before{content:"↳";position:absolute;right:0;top:6px;color:var(--accent);font-size:.85rem;}
+  .toc a{color:var(--ink-soft);text-decoration:none;font-weight:700;}
+  .toc a:hover{color:var(--steel);}
+  .toc a .lbl{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    color:var(--steel);font-size:.78rem;margin-inline-end:8px;
+  }
+  .lesson{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    margin-bottom:26px;overflow:hidden;scroll-margin-top:16px;
+  }
+  .lesson-head{
+    background:var(--card-head);border-bottom:2px solid var(--accent);
+    padding:14px 22px;
+  }
+  .lnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--accent);color:#101820;font-weight:700;font-size:.78rem;
+    padding:2px 10px;border-radius:6px;margin-inline-end:10px;
+    display:inline-block;vertical-align:2px;
+  }
+  h2{font-size:1.1rem;font-weight:800;color:#FFF;display:inline;line-height:2;}
+  .lesson-body{padding:22px;}
+  h3{
+    font-size:1rem;font-weight:800;color:var(--green);
+    margin:26px 0 12px;padding-bottom:7px;border-bottom:1px dashed var(--line);
+  }
+  h3 .mark{color:var(--green);font-size:.75rem;margin-inline-end:8px;}
+  .lesson-body h3:first-of-type{margin-top:0;}
+  p{margin-bottom:12px;font-size:.94rem;color:var(--ink-soft);}
+  p b, li b{color:var(--ink);font-weight:800;}
+  ul.pts{list-style:none;margin:0 0 14px;}
+  ul.pts li{position:relative;padding:5px 22px 5px 0;font-size:.92rem;color:var(--ink-soft);}
+  ul.pts li::before{content:"▸";position:absolute;right:0;top:5px;color:var(--accent);font-size:.8rem;}
+  ol.steps{list-style:none;counter-reset:st;margin:6px 0 14px;}
+  ol.steps li{
+    position:relative;counter-increment:st;
+    padding:8px 40px 8px 0;font-size:.92rem;color:var(--ink-soft);
+    border-bottom:1px dashed var(--line);
+  }
+  ol.steps li:last-child{border-bottom:none;}
+  ol.steps li::before{
+    content:counter(st,decimal-leading-zero);
+    position:absolute;right:0;top:8px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:isolate;
+    background:var(--card-head);color:var(--steel);
+    border:1px solid var(--line);border-radius:6px;
+    font-size:.72rem;font-weight:700;padding:1px 7px;
+  }
+  .keybox{
+    background:rgba(255,122,92,.07);border:1.5px solid var(--accent);
+    border-radius:12px;padding:14px 18px;margin:16px 0;
+  }
+  .keybox-title{font-weight:900;color:var(--accent);font-size:.9rem;margin-bottom:6px;}
+  .keybox p{margin-bottom:6px;font-size:.9rem;}
+  .keybox p:last-child{margin-bottom:0;}
+  .example{
+    background:rgba(124,199,240,.06);border:1.5px solid var(--steel);
+    border-radius:12px;padding:15px 18px;margin:16px 0;
+  }
+  .example-title{font-weight:900;color:var(--steel);font-size:.9rem;margin-bottom:8px;}
+  .example p{font-size:.9rem;margin-bottom:8px;}
+  .example p:last-child{margin-bottom:0;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.87rem;}
+  th{background:var(--card-head);color:var(--steel);font-weight:800;padding:8px 12px;border:1px solid var(--line);text-align:right;}
+  td{padding:8px 12px;border:1px solid var(--line);color:var(--ink-soft);}
+  td code{white-space:normal;}
+  .deliver{
+    background:rgba(122,223,160,.07);border:1.5px solid var(--green);
+    border-radius:12px;padding:16px 20px;margin:14px 0;
+  }
+  .deliver-title{font-size:.95rem;font-weight:900;color:var(--green);margin-bottom:10px;}
+  .deliver p{font-size:.9rem;}
+  .deliver ol{padding-inline-start:22px;font-size:.9rem;color:var(--ink-soft);}
+  .deliver ol li{margin-bottom:8px;}
+  .skipbox{
+    background:rgba(242,193,78,.06);border:1.5px solid var(--gold);
+    border-radius:12px;padding:14px 18px;margin:16px 0;
+  }
+  .skipbox-title{font-weight:900;color:var(--gold);font-size:.9rem;margin-bottom:8px;}
+  .skipbox ul{list-style:none;margin:0;}
+  .skipbox li{position:relative;padding:4px 24px 4px 0;font-size:.9rem;color:var(--ink-soft);}
+  .skipbox li::before{content:"✕";position:absolute;right:0;top:4px;color:var(--gold);font-weight:800;font-size:.82rem;}
+  .res{
+    background:rgba(201,166,245,.07);border:1.5px solid var(--purple);
+    border-radius:12px;padding:14px 18px;margin:18px 0;
+  }
+  .res-title{font-weight:900;color:var(--purple);font-size:.9rem;margin-bottom:8px;}
+  .res ul{list-style:none;margin:0;}
+  .res li{position:relative;padding:6px 26px 6px 0;font-size:.88rem;color:var(--ink-soft);border-bottom:1px dashed var(--line);}
+  .res li:last-of-type{border-bottom:none;}
+  .res li::before{position:absolute;right:0;top:6px;font-size:.85rem;}
+  .res li.v::before{content:"🎥";}
+  .res li.w::before{content:"🔗";}
+  .res a{color:var(--steel);text-decoration:none;font-weight:700;border-bottom:1px dotted var(--steel);}
+  .res a:hover{color:var(--gold);border-color:var(--gold);}
+  .res .tip{font-size:.8rem;color:#93A6B6;margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);}
+  footer{
+    text-align:center;margin-top:28px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    font-size:.68rem;font-weight:600;letter-spacing:.14em;color:#5A6C7C;
+  }
+  @media(max-width:600px){
+    body{font-size:15px;padding:14px 8px 60px;}
+    header{padding:20px 16px;}
+    .lesson-body{padding:18px 14px;}
+    h1{font-size:1.3rem;}
+    h2{font-size:1.02rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">SOFTWARE FILE · S0 · DRAWING READING · PDF &amp; DWG</div>
+  <h1><em>Software S0</em> — Drawing Reading</h1>
+  <p class="subtitle">اولین ایستگاه شاخه‌ی <code>2.2</code>: نقشه‌خوانی. این یک نرم‌افزار نیست — مهارتی است که همه‌ی نرم‌افزارهای بعدی روی آن سوارند. در سه تا شش ماه اول کار، بیشتر از آنکه نقشه بکشی، نقشه <b>می‌خوانی</b>.</p>
+</header>
+
+<nav class="toc">
+  <div class="toc-title">CONTENTS</div>
+  <ul>
+    <li><a href="#d1"><span class="lbl">0.1</span> نقشه چطور به دستت می‌رسد؟ (pdf &amp; dwg)</a></li>
+    <li><a href="#d2"><span class="lbl">0.2</span> اجزای هر نقشه — Title Block تا Notes</a></li>
+    <li><a href="#d3"><span class="lbl">0.3</span> انواع نقشه — GA تا Schedules</a></li>
+    <li><a href="#d4"><span class="lbl">0.4</span> Grids و Levels — زبان مکان و ارتفاع</a></li>
+    <li><a href="#d5"><span class="lbl">0.5</span> نقشه‌های Steel</a></li>
+    <li><a href="#d6"><span class="lbl">0.6</span> نقشه‌های RC — میلگرد و BS 8666</a></li>
+    <li><a href="#d7"><span class="lbl">0.7</span> مخفف‌ها و قراردادهای ترسیمی</a></li>
+    <li><a href="#d8"><span class="lbl">0.8</span> جمع‌بندی، تمرین عملی و Quiz</a></li>
+  </ul>
+</nav>
+
+<!-- ================= 0.1 ================= -->
+<section class="lesson" id="d1">
+  <div class="lesson-head"><span class="lnum">0.1</span><h2>نقشه چطور به دستت می‌رسد؟ (pdf &amp; dwg)</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.1.1 — دو قالب اصلی نقشه</h3>
+    <p>در دفتر، نقشه تقریباً همیشه در یکی از این دو قالب به دستت می‌رسد:</p>
+    <ul class="pts">
+      <li><b><code>PDF</code>:</b> نسخه‌ی «منتشرشده» — برای خواندن، چک کردن و <code>Mark-up</code>. ابزارش <code>Bluebeam Revu</code> است (ایستگاه بعدی).</li>
+      <li><b><code>DWG</code>:</b> فایل «زنده»ی <code>CAD</code> — قابل ویرایش، با <code>Layers</code>. ابزارش <code>AutoCAD</code> است (ایستگاه <code>S2</code>).</li>
+    </ul>
+    <p>یک قالب سوم هم کم‌کم زیاد می‌بینی: مدل <code>RVT</code> (فایل <code>Revit</code>) یا <code>IFC</code> — که نقشه نیست، مدل سه‌بعدی است و نقشه‌ها از دل آن بیرون می‌آیند.</p>
+
+    <table>
+      <tr><th>قالب</th><th>چیست؟</th><th>با چه نرم‌افزاری؟</th></tr>
+      <tr><td><code>PDF</code></td><td>نسخه‌ی منتشرشده برای خواندن و کامنت</td><td><code>Bluebeam Revu</code> / <code>Adobe Acrobat</code></td></tr>
+      <tr><td><code>DWG</code></td><td>فایل زنده‌ی <code>CAD</code></td><td><code>AutoCAD</code> / <code>DWG TrueView</code> (رایگان)</td></tr>
+      <tr><td><code>RVT / IFC</code></td><td>مدل سه‌بعدی <code>BIM</code></td><td><code>Revit</code> / <code>Navisworks Freedom</code> (رایگان)</td></tr>
+    </table>
+
+    <div class="keybox">
+      <div class="keybox-title">⚠️ یک قانون حرفه‌ای</div>
+      <p>نسخه‌ی <code>PDF</code> منتشرشده «سند رسمی» است؛ فایل <code>DWG</code> فقط ابزار کار. اگر بین این دو اختلاف بود، همیشه <code>PDF</code> امضاشده (با <code>Revision</code> جدیدتر) ملاک است. این را در دفتر جدی می‌گیرند.</p>
+    </div>
+
+    <h3><span class="mark">◆</span>0.1.2 — از کجا نقشه‌ی واقعی برای تمرین پیدا کنی؟</h3>
+    <p>خبر خوب: در <code>UK</code> نقشه‌های واقعی پروژه‌ها به‌صورت عمومی و رایگان موجودند. هر <code>Planning Application</code> که به شهرداری می‌رود، نقشه‌هایش در <code>Planning Portal</code> آن <code>Council</code> منتشر می‌شود:</p>
+    <ol class="steps">
+      <li>سایت یک <code>Council</code> را باز کن — مثلاً جست‌وجو کن: <code>Camden planning applications search</code>.</li>
+      <li>یک پروژه‌ی ساختمانی پیدا کن (ترجیحاً <code>Extension</code> یا ساختمان چندطبقه).</li>
+      <li>بخش <code>Documents</code> را باز کن و دنبال فایل‌هایی با عنوان <code>Proposed Plans</code> یا <code>Structural</code> بگرد.</li>
+      <li>چند نقشه دانلود کن — این‌ها مواد تمرین تو در کل این درس هستند.</li>
+    </ol>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.1</div>
+      <ul>
+        <li class="w"><a href="https://www.planningportal.co.uk/" target="_blank">Planning Portal — UK</a><br>درگاه رسمی <code>Planning</code> در <code>UK</code>؛ از اینجا به <code>Council</code> ها می‌رسی.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=how+to+read+construction+drawings+for+beginners" target="_blank">How to Read Construction Drawings — for Beginners</a><br>نقطه‌ی شروع ویدیویی برای کل این درس.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.2 ================= -->
+<section class="lesson" id="d2">
+  <div class="lesson-head"><span class="lnum">0.2</span><h2>اجزای هر نقشه — Title Block تا Notes</h2></div>
+  <div class="lesson-body">
+
+    <p>هر نقشه‌ی حرفه‌ای، جدا از محتوایش، چند جزء ثابت دارد. اول این‌ها را بخوان — قبل از خود نقشه.</p>
+
+    <h3><span class="mark">◆</span>0.2.1 — Title Block</h3>
+    <p>کادر پایین یا گوشه‌ی نقشه. شناسنامه‌ی نقشه است و این‌ها را می‌گوید:</p>
+    <ul class="pts">
+      <li><b><code>Project Name / Number</code>:</b> کدام پروژه.</li>
+      <li><b><code>Drawing Title / Number</code>:</b> این نقشه چیست — مثلاً <code>First Floor GA Plan — S-101</code>.</li>
+      <li><b><code>Scale</code>:</b> مقیاس — مثلاً <code>1:100 @ A1</code> یعنی در کاغذ <code>A1</code> مقیاس <code>1:100</code> است.</li>
+      <li><b><code>Drawn / Checked / Approved By</code>:</b> چه کسی کشیده، چه کسی چک کرده. اسم تو به‌عنوان <code>Graduate</code> اول در خانه‌ی <code>Drawn</code> می‌نشیند.</li>
+      <li><b><code>Revision</code>:</b> نسخه‌ی نقشه — <code>P01, P02, ... C01, ...</code>.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.2.2 — Revision و Status</h3>
+    <p>نقشه‌ها بارها عوض می‌شوند. دو چیز این تغییرها را ردیابی می‌کند:</p>
+    <ul class="pts">
+      <li><b><code>Revision Table</code>:</b> جدولی کنار <code>Title Block</code> که می‌گوید هر نسخه کِی و چرا صادر شده.</li>
+      <li><b><code>Revision Cloud</code>:</b> ابری دور ناحیه‌ی تغییر، با یک مثلث و شماره‌ی <code>Revision</code> کنارش.</li>
+      <li><b><code>Status Code (ISO 19650)</code>:</b> نقشه در چه مرحله‌ای است — مثلاً <code>S2 — For Information</code>، <code>S4 — For Construction Approval</code>، <code>A1 — Authorised</code>. مهم‌ترین درسش: هر نقشه‌ای را نمی‌شود ساخت! فقط نقشه با وضعیت مناسب ساخت.</li>
+    </ul>
+
+    <div class="keybox">
+      <div class="keybox-title">💬 نکته‌ی Interview</div>
+      <p>اگر پرسیدند اولین کاری که با یک نقشه‌ی جدید می‌کنی چیست:</p>
+      <span class="en">"I always check the <code>Title Block</code> first — drawing number, revision, scale and status — before reading the content."</span>
+      <p>این جواب نشان می‌دهد با فرهنگ دفتر آشنایی.</p>
+    </div>
+
+    <h3><span class="mark">◆</span>0.2.3 — بقیه‌ی اجزا</h3>
+    <ul class="pts">
+      <li><b><code>North Arrow</code>:</b> جهت شمال — برای جهت‌گیری پلان.</li>
+      <li><b><code>Key Plan</code>:</b> نقشه‌ی کوچکی که نشان می‌دهد این برگه کدام قسمت ساختمان است.</li>
+      <li><b><code>General Notes</code>:</b> یادداشت‌های عمومی — مصالح، آیین‌نامه‌ها، فرض‌ها. خیلی‌ها نمی‌خوانندش؛ تو بخوان، چون نصف جواب‌ها آنجاست.</li>
+      <li><b><code>Scale Bar</code>:</b> خط‌کش ترسیم‌شده — چون <code>PDF</code> چاپ‌شده ممکن است بزرگ/کوچک شده باشد، هرگز با خط‌کش از روی کاغذ اندازه نگیر؛ از <code>Scale Bar</code> یا ابعاد نوشته‌شده استفاده کن.</li>
+    </ul>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.2</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=title+block+revision+construction+drawing+explained" target="_blank">Title Block &amp; Revisions Explained</a><br>شناسنامه‌ی نقشه و ردیابی تغییرها.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=ISO+19650+status+codes+explained" target="_blank">ISO 19650 Status Codes</a><br>وضعیت نقشه در <code>UK</code> — برای سؤال‌های <code>BIM</code> در <code>Interview</code> هم مفید است.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.3 ================= -->
+<section class="lesson" id="d3">
+  <div class="lesson-head"><span class="lnum">0.3</span><h2>انواع نقشه — GA تا Schedules</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.3.1 — GA Plan (General Arrangement)</h3>
+    <p>مهم‌ترین نقشه. پلان کلی هر طبقه که «چیدمان» را نشان می‌دهد: <code>Grids</code>، ستون‌ها، تیرها، دیوارها، بازشوها. وقتی می‌گویند «نقشه‌ی سازه»، معمولاً منظورشان همین است. برای هر طبقه یک <code>GA</code> هست + یکی برای <code>Roof</code> + یکی برای <code>Foundation</code>.</p>
+
+    <h3><span class="mark">◆</span>0.3.2 — Sections و Elevations</h3>
+    <ul class="pts">
+      <li><b><code>Section</code>:</b> برش قائم — انگار ساختمان را با چاقو بریده‌ای و از پهلو نگاه می‌کنی. ارتفاع‌ها و ترازها را اینجا می‌فهمی.</li>
+      <li><b><code>Section Mark</code>:</b> علامتی روی پلان (مثلاً <code>A—A</code>) که می‌گوید برش از کجا و به کدام جهت زده شده. دنبال کردنش را تمرین کن — از پلان به برش و برعکس.</li>
+      <li><b><code>Elevation</code>:</b> نمای بیرونی — بیشتر کار <code>Architect</code> است، ولی باید بتوانی بخوانی.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.3.3 — Details</h3>
+    <p>بزرگ‌نمایی یک نقطه‌ی خاص — معمولاً در مقیاس <code>1:20</code>، <code>1:10</code> یا <code>1:5</code>. مثلاً محل نشستن تیر روی ستون، یا جزئیات <code>Pad Foundation</code>. روی پلان یک <code>Detail Mark</code> (دایره با شماره) هست که می‌گوید این نقطه در کدام برگه بزرگ شده.</p>
+
+    <h3><span class="mark">◆</span>0.3.4 — Schedules</h3>
+    <p>جدول‌هایی که اطلاعات تکراری را جمع می‌کنند تا نقشه شلوغ نشود:</p>
+    <ul class="pts">
+      <li><b><code>Column Schedule</code>:</b> سایز و مشخصات هر ستون در هر طبقه.</li>
+      <li><b><code>Beam Schedule</code>:</b> همان برای تیرها.</li>
+      <li><b><code>Bar Bending Schedule (BBS)</code>:</b> جدول میلگردها — در درس <code>0.6</code> می‌بینیمش.</li>
+    </ul>
+
+    <div class="example">
+      <div class="example-title">📐 تمرین ذهنی با TB-01</div>
+      <p>ساختمان تمرینی <code>TB-01</code> را در نظر بگیر (۲ طبقه + <code>Roof</code>). بسته‌ی کامل نقشه‌هایش چه می‌شود؟</p>
+      <p>حداقل: <code>Foundation Plan</code> · <code>Ground Floor GA</code> · <code>First Floor GA</code> · <code>Roof GA</code> · دو <code>Section</code> (طولی و عرضی) · چند <code>Detail</code> (اتصال، <code>Base Plate</code>، <code>Pad Foundation</code>) · <code>Column Schedule</code>. همین فهرست، نقشه‌هایی است که در ایستگاه‌های <code>S2</code> و <code>S3</code> خودت تولید می‌کنی.</p>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.3</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=general+arrangement+drawing+structural+explained" target="_blank">GA Drawings Explained</a><br>مهم‌ترین نوع نقشه.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=plans+sections+elevations+explained+construction" target="_blank">Plans, Sections &amp; Elevations</a><br>رابطه‌ی سه نمای اصلی با هم.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.4 ================= -->
+<section class="lesson" id="d4">
+  <div class="lesson-head"><span class="lnum">0.4</span><h2>Grids و Levels — زبان مکان و ارتفاع</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.4.1 — Grid References</h3>
+    <p>شبکه‌ی خطوطی که روی همه‌ی نقشه‌ها تکرار می‌شود: یک جهت با حروف (<code>A, B, C, ...</code>) و جهت دیگر با اعداد (<code>1, 2, 3, ...</code>). هر ستون با تقاطعش صدا زده می‌شود — <code>Column B2</code> یعنی تقاطع گرید <code>B</code> و <code>2</code>. این زبان مشترک همه‌ی افراد پروژه است: مهندس، معمار، پیمانکار.</p>
+
+    <h3><span class="mark">◆</span>0.4.2 — Levels (ترازها)</h3>
+    <p>مهم‌ترین بخش این درس — و یکی از رایج‌ترین جاهایی که <code>Graduates</code> اشتباه می‌کنند:</p>
+    <table>
+      <tr><th>مخفف</th><th>یعنی</th><th>توضیح</th></tr>
+      <tr><td><code>SSL</code></td><td><code>Structural Slab Level</code></td><td>تراز روی <b>بتن سازه‌ای</b> — چیزی که ما طراحی می‌کنیم</td></tr>
+      <tr><td><code>FFL</code></td><td><code>Finished Floor Level</code></td><td>تراز روی <b>کف تمام‌شده</b> — بعد از کف‌سازی</td></tr>
+      <tr><td><code>TOS</code></td><td><code>Top of Steel</code></td><td>تراز روی بال بالایی تیر فولادی</td></tr>
+      <tr><td><code>TOC</code></td><td><code>Top of Concrete</code></td><td>تراز روی بتن</td></tr>
+      <tr><td><code>AOD</code></td><td><code>Above Ordnance Datum</code></td><td>ارتفاع نسبت به مبدأ رسمی <code>UK</code> — ترازهای مطلق مثل <code>+12.450 AOD</code></td></tr>
+    </table>
+
+    <div class="keybox">
+      <div class="keybox-title">⚠️ تله‌ی کلاسیک: SSL ≠ FFL</div>
+      <p>بین <code>SSL</code> و <code>FFL</code> همیشه یک ضخامت کف‌سازی (مثلاً <code>50 mm Screed</code>) هست. اگر این دو را قاطی کنی، کل ارتفاع‌های سازه‌ات به اندازه‌ی همان <code>Screed</code> اشتباه می‌شود. معمار معمولاً با <code>FFL</code> حرف می‌زند؛ ما با <code>SSL</code> طراحی می‌کنیم. همیشه بپرس: «این تراز <code>SSL</code> است یا <code>FFL</code>؟»</p>
+    </div>
+
+    <h3><span class="mark">◆</span>0.4.3 — Setting Out Dimensions</h3>
+    <p>ابعادی که موقعیت اعضا را نسبت به <code>Grids</code> مشخص می‌کنند — مثلاً «لبه‌ی دیوار <code>150</code> از گرید <code>A</code>». پیمانکار با همین‌ها ساختمان را روی زمین «پیاده» می‌کند. دو نوع اندازه‌گذاری می‌بینی: <code>Running Dimensions</code> (از یک مبدأ) و <code>Chain Dimensions</code> (پشت‌سرهم).</p>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.4</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=FFL+SSL+datum+levels+construction+drawings+explained" target="_blank">Levels — FFL, SSL &amp; Datums</a><br>مهم‌ترین ویدیوی این درس؛ همان تله‌ی کلاسیک.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=grid+lines+setting+out+construction+drawing" target="_blank">Grids &amp; Setting Out</a><br>زبان مکان روی نقشه.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.5 ================= -->
+<section class="lesson" id="d5">
+  <div class="lesson-head"><span class="lnum">0.5</span><h2>نقشه‌های Steel</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.5.1 — نام‌گذاری مقاطع فولادی UK</h3>
+    <p>روی نقشه، هر تیر و ستون فولادی با «کد مقطعش» نوشته می‌شود. رایج‌ترین‌ها:</p>
+    <table>
+      <tr><th>کد</th><th>نام کامل</th><th>کاربرد معمول</th></tr>
+      <tr><td><code>UB</code></td><td><code>Universal Beam</code></td><td>تیر — مثلاً <code>457×191×67 UB</code></td></tr>
+      <tr><td><code>UC</code></td><td><code>Universal Column</code></td><td>ستون — مثلاً <code>203×203×46 UC</code></td></tr>
+      <tr><td><code>PFC</code></td><td><code>Parallel Flange Channel</code></td><td>ناودانی — تیرهای لبه و <code>Trimmers</code></td></tr>
+      <tr><td><code>RSA</code></td><td><code>Rolled Steel Angle</code></td><td>نبشی — <code>Cleats</code> و اعضای فرعی</td></tr>
+      <tr><td><code>SHS / RHS / CHS</code></td><td><code>Square / Rectangular / Circular Hollow Section</code></td><td>قوطی و لوله — <code>Bracing</code> و ستون‌های نما</td></tr>
+    </table>
+    <p>معنی اعداد: <code>457×191×67 UB</code> یعنی ارتفاع اسمی <code>457 mm</code> × عرض بال <code>191 mm</code> × وزن <code>67 kg/m</code>. عدد سوم (وزن بر متر) همان چیزی است که سایزهای هم‌خانواده را از هم جدا می‌کند.</p>
+    <p>کنار مقطع، <code>Steel Grade</code> هم می‌آید: <code>S275</code> یا <code>S355</code> — عدد یعنی <code>Yield Strength</code> بر حسب <code>N/mm²</code>. ساختمان تمرینی ما <code>TB-01</code> با <code>S355</code> است.</p>
+
+    <h3><span class="mark">◆</span>0.5.2 — Connections روی نقشه</h3>
+    <ul class="pts">
+      <li><b><code>Fin Plate</code>:</b> ورق تیغه‌ای جوش‌شده به ستون که تیر با پیچ به آن می‌بندد — رایج‌ترین اتصال ساده در <code>UK</code>.</li>
+      <li><b><code>End Plate</code>:</b> ورق جوش‌شده به انتهای تیر که به ستون پیچ می‌شود.</li>
+      <li><b><code>Cleat</code>:</b> نبشی اتصال.</li>
+      <li><b><code>Base Plate</code>:</b> ورق زیر ستون که با <code>Holding Down Bolts</code> به پی می‌بندد.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.5.3 — Bolts و Welds</h3>
+    <ul class="pts">
+      <li><b><code>Bolt Notation</code>:</b> مثلاً <code>M20 Grade 8.8</code> — قطر <code>20 mm</code>، رده‌ی مقاومت <code>8.8</code>. تعداد و آرایش پیچ‌ها هم روی <code>Detail</code> می‌آید.</li>
+      <li><b><code>Fillet Weld</code>:</b> جوش گوشه — علامت مثلثی روی خط مرجع. عدد کنارش (مثلاً <code>6 FW</code>) اندازه‌ی ساق جوش است.</li>
+      <li><b><code>Butt Weld</code>:</b> جوش لب‌به‌لب — برای اتصالات کامل.</li>
+    </ul>
+    <p>فعلاً لازم نیست جوش طراحی کنی — فقط باید علامتش را روی نقشه بشناسی و بدانی <code>6 mm Fillet Weld</code> یعنی چه.</p>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.5</div>
+      <ul>
+        <li class="w"><a href="https://www.steelconstruction.info/" target="_blank">SteelConstruction.info</a><br>مرجع رایگان و رسمی فولاد <code>UK</code> — مقاطع، اتصالات، همه‌چیز. <b>Bookmark کن.</b></li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=steel+beam+sizes+UB+UC+explained+uk" target="_blank">UK Steel Sections — UB &amp; UC Explained</a><br>معنی کدهای مقاطع.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=welding+symbols+drawing+explained" target="_blank">Welding Symbols Explained</a><br>خواندن علائم جوش روی <code>Detail</code>.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.6 ================= -->
+<section class="lesson" id="d6">
+  <div class="lesson-head"><span class="lnum">0.6</span><h2>نقشه‌های RC — میلگرد و BS 8666</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.6.1 — Rebar Notation: رمز اصلی</h3>
+    <p>روی نقشه‌ی بتنی، هر گروه میلگرد با یک کد فشرده نوشته می‌شود. بیایید یکی را کامل باز کنیم:</p>
+    <span class="en"><code>12H16-200-B1</code></span>
+    <table>
+      <tr><th>بخش</th><th>یعنی</th></tr>
+      <tr><td><code>12</code></td><td>تعداد میلگردها: <code>12</code> عدد</td></tr>
+      <tr><td><code>H</code></td><td>نوع فولاد: <code>H = Grade B500</code> (میلگرد آجدار استاندارد <code>UK</code>)</td></tr>
+      <tr><td><code>16</code></td><td>قطر: <code>16 mm</code></td></tr>
+      <tr><td><code>200</code></td><td>فاصله‌ی مرکز تا مرکز: <code>200 mm</code></td></tr>
+      <tr><td><code>B1</code></td><td>موقعیت: لایه‌ی اول پایین (<code>Bottom, 1st Layer</code>)</td></tr>
+    </table>
+    <p>کدهای موقعیت که باید بشناسی:</p>
+    <ul class="pts">
+      <li><b><code>B1 / B2</code>:</b> لایه‌ی اول/دوم <b>پایین</b> — میلگرد کششی وسط دهانه.</li>
+      <li><b><code>T1 / T2</code>:</b> لایه‌ی اول/دوم <b>بالا</b> — میلگرد کششی روی تکیه‌گاه.</li>
+      <li><b><code>NF / FF / EF</code>:</b> <code>Near Face / Far Face / Each Face</code> — برای دیوارها.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.6.2 — Bar Marks و Bar Bending Schedule</h3>
+    <p>هر گروه میلگرد یک شماره (<code>Bar Mark</code>) دارد که به جدول <code>Bar Bending Schedule (BBS)</code> وصل می‌شود. این جدول طبق استاندارد <code>BS 8666</code> تهیه می‌شود و برای هر <code>Bar Mark</code> می‌گوید: قطر، طول، تعداد، و <b>شکل خم</b>.</p>
+    <p>شکل خم با <code>Shape Code</code> مشخص می‌شود — چند تای رایج:</p>
+    <ul class="pts">
+      <li><b><code>00</code>:</b> میلگرد صاف، بدون خم.</li>
+      <li><b><code>11</code>:</b> یک خم <code>90°</code> در یک سر (<code>L</code> شکل).</li>
+      <li><b><code>21</code>:</b> دو خم — <code>U</code> شکل.</li>
+      <li><b><code>51</code>:</b> <code>Link / Stirrup</code> بسته — خاموت.</li>
+    </ul>
+    <p>لازم نیست همه را حفظ کنی — جدولش همیشه دم دست است. فقط باید بدانی <code>Shape Code</code> چیست و کجا دنبالش بگردی.</p>
+
+    <h3><span class="mark">◆</span>0.6.3 — Cover, Laps و Mesh</h3>
+    <ul class="pts">
+      <li><b><code>Cover</code>:</b> فاصله‌ی میلگرد تا سطح بتن — مثلاً <code>c = 35 mm</code>. برای دوام و آتش حیاتی است و همیشه در <code>General Notes</code> می‌آید.</li>
+      <li><b><code>Lap</code>:</b> طول هم‌پوشانی دو میلگرد که به هم «وصله» می‌شوند — مثلاً <code>Lap = 40Ø</code> یعنی <code>40</code> برابر قطر.</li>
+      <li><b><code>Mesh</code>:</b> شبکه‌ی جوشی آماده — <code>A142, A252, A393</code>. عدد یعنی سطح مقطع فولاد در هر متر (<code>mm²/m</code>). در <code>Slabs</code> خیلی رایج است.</li>
+    </ul>
+
+    <div class="example">
+      <div class="example-title">📐 تمرین رمزگشایی</div>
+      <p>این خط روی نقشه‌ی یک تیر بتنی آمده: <code>4H20-B1 + 2H12-T1, H8-150 Links</code></p>
+      <p>ترجمه: <code>4</code> میلگرد <code>H20</code> پایین (کشش وسط دهانه) + <code>2</code> میلگرد <code>H12</code> بالا (نگهدارنده/تکیه‌گاه) + خاموت <code>H8</code> هر <code>150 mm</code>. اگر این را توانستی بخوانی، سواد <code>RC Drawing</code> پایه‌ات کامل است. ✅</p>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.6</div>
+      <ul>
+        <li class="w"><a href="https://heatonmanufacturing.co.uk/how-to-read-rebar-drawings/" target="_blank">How to Read Rebar Drawings</a><br>توضیح ساده و کاربردی نماد میلگرد در <code>UK</code>.</li>
+        <li class="w"><a href="https://heatonmanufacturing.co.uk/british-standards-for-rebar-bs4449-bs8666/" target="_blank">BS 4449 &amp; BS 8666 Explained</a><br>استانداردهای میلگرد و <code>Bar Bending Schedule</code>.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=bar+bending+schedule+BS8666+shape+codes+explained" target="_blank">BBS &amp; Shape Codes</a><br>جدول میلگرد و کدهای خم.</li>
+      </ul>
+      <div class="tip">💡 نگران حجم این درس نباش — جزئیات <code>RC</code> در <code>Phase 8</code> مسیر ۱ دوباره و عمیق‌تر می‌آید. اینجا فقط «خواندن» مهم است.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.7 ================= -->
+<section class="lesson" id="d7">
+  <div class="lesson-head"><span class="lnum">0.7</span><h2>مخفف‌ها و قراردادهای ترسیمی</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.7.1 — مخفف‌های پرتکرار</h3>
+    <table>
+      <tr><th>مخفف</th><th>کامل</th><th>یعنی</th></tr>
+      <tr><td><code>TYP</code></td><td><code>Typical</code></td><td>این جزئیات در همه‌ی موارد مشابه تکرار می‌شود</td></tr>
+      <tr><td><code>NTS</code></td><td><code>Not To Scale</code></td><td>با مقیاس نیست — از رویش اندازه نگیر!</td></tr>
+      <tr><td><code>U.N.O.</code></td><td><code>Unless Noted Otherwise</code></td><td>مگر جای دیگر خلافش گفته شده باشد</td></tr>
+      <tr><td><code>EQ</code></td><td><code>Equal</code></td><td>فاصله‌های مساوی</td></tr>
+      <tr><td><code>C/C</code></td><td><code>Centre to Centre</code></td><td>فاصله‌ی مرکز تا مرکز</td></tr>
+      <tr><td><code>CL</code> یا <code>℄</code></td><td><code>Centre Line</code></td><td>خط مرکزی</td></tr>
+      <tr><td><code>TBC</code></td><td><code>To Be Confirmed</code></td><td>هنوز قطعی نیست</td></tr>
+      <tr><td><code>SIM</code></td><td><code>Similar</code></td><td>مشابه — با تفاوت جزئی</td></tr>
+      <tr><td><code>o/a</code></td><td><code>Overall</code></td><td>اندازه‌ی کلی</td></tr>
+      <tr><td><code>Ø</code> یا <code>DIA</code></td><td><code>Diameter</code></td><td>قطر</td></tr>
+      <tr><td><code>DPC</code></td><td><code>Damp Proof Course</code></td><td>لایه‌ی رطوبت‌بند</td></tr>
+      <tr><td><code>RC</code></td><td><code>Reinforced Concrete</code></td><td>بتن مسلح</td></tr>
+    </table>
+
+    <h3><span class="mark">◆</span>0.7.2 — انواع خط</h3>
+    <ul class="pts">
+      <li><b>خط پیوسته‌ی پررنگ:</b> لبه‌ای که در این نما «دیده می‌شود».</li>
+      <li><b>خط‌چین:</b> چیزی که «پنهان» است — پشت یا زیر سطح برش. مثلاً تیر زیر دال در پلان.</li>
+      <li><b>خط نقطه‌چین بلند-کوتاه:</b> <code>Centre Line</code> — خط مرکزی گرید یا عضو.</li>
+      <li><b>خط نازک:</b> اندازه‌گذاری و <code>Hatch</code>.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.7.3 — Hatching (هاشور مصالح)</h3>
+    <p>هر مصالح در برش هاشور خودش را دارد — این‌ها را بشناس تا در <code>Section</code> بفهمی هر لایه چیست:</p>
+    <ul class="pts">
+      <li><b><code>Concrete</code>:</b> هاشور با مثلث‌ها و نقطه‌های پراکنده.</li>
+      <li><b><code>Blockwork / Brickwork</code>:</b> هاشور مورب ساده (آجر معمولاً جفت‌خط مورب).</li>
+      <li><b><code>Insulation</code>:</b> موج یا زیگزاگ.</li>
+      <li><b><code>Hardcore / Soil</code>:</b> نقطه‌های نامنظم یا علامت خاک.</li>
+    </ul>
+
+    <h3><span class="mark">◆</span>0.7.4 — Cross-referencing: دنبال کردن ارجاع‌ها</h3>
+    <p>هیچ نقشه‌ای تنها نیست. مهارت واقعی نقشه‌خوانی، دنبال کردن زنجیره‌ی ارجاع‌هاست:</p>
+    <span class="en">GA Plan → Section Mark A-A → Section Drawing → Detail Mark 5 → Detail Drawing → General Notes</span>
+    <p>تمرینش ساده است: از یک نقطه در پلان شروع کن و ارجاع‌ها را تا آخرین <code>Detail</code> دنبال کن. اولین بار گیج می‌شوی؛ بار سوم عادت می‌شود.</p>
+
+    <div class="skipbox">
+      <div class="skipbox-title">در این ایستگاه لازم نداری</div>
+      <ul>
+        <li>کشیدن نقشه از صفر — آن کار ایستگاه <code>S2</code> و <code>S3</code> است</li>
+        <li><code>Shop / Fabrication Drawings</code> — کار <code>Detailer</code> است</li>
+        <li>نقشه‌های <code>MEP</code> و <code>Architectural</code> در حد تخصصی</li>
+        <li>حفظ کردن کل <code>Shape Codes</code> استاندارد <code>BS 8666</code></li>
+      </ul>
+    </div>
+
+    <div class="res">
+      <div class="res-title">📚 منابع تکمیلی — 0.7</div>
+      <ul>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=construction+drawing+abbreviations+symbols+explained" target="_blank">Drawing Abbreviations &amp; Symbols</a><br>مرور مخفف‌ها و علائم رایج.</li>
+        <li class="v"><a href="https://www.youtube.com/results?search_query=line+types+hatching+construction+drawings" target="_blank">Line Types &amp; Hatching</a><br>زبان خط و هاشور.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= 0.8 ================= -->
+<section class="lesson" id="d8">
+  <div class="lesson-head"><span class="lnum">0.8</span><h2>جمع‌بندی، تمرین عملی و Quiz</h2></div>
+  <div class="lesson-body">
+
+    <h3><span class="mark">◆</span>0.8.1 — نقشه‌ی راه این ایستگاه</h3>
+    <table>
+      <tr><th>قدم</th><th>موضوع</th><th>زمان تقریبی</th></tr>
+      <tr><td>۱</td><td>قالب‌ها + پیدا کردن نقشه‌ی واقعی</td><td><code>1 h</code></td></tr>
+      <tr><td>۲</td><td>اجزای نقشه + انواع نقشه</td><td><code>3 h</code></td></tr>
+      <tr><td>۳</td><td><code>Grids &amp; Levels</code> ⚠️</td><td><code>2 h</code></td></tr>
+      <tr><td>۴</td><td>نقشه‌های <code>Steel</code></td><td><code>3 h</code></td></tr>
+      <tr><td>۵</td><td>نقشه‌های <code>RC</code></td><td><code>3 h</code></td></tr>
+      <tr><td>۶</td><td>مخفف‌ها + قراردادها + تمرین کلی</td><td><code>3–5 h</code></td></tr>
+    </table>
+    <p>جمع: <code>≈ 15–20 h</code> متمرکز — و بعد به‌صورت طبیعی با هر نقشه‌ای که در بقیه‌ی مسیر می‌بینی، قوی‌تر می‌شود.</p>
+
+    <div class="deliver">
+      <div class="deliver-title">🛠 تمرین عملی — Drawing Decode Report (سند Portfolio)</div>
+      <p>یک بسته نقشه‌ی واقعی از <code>Planning Portal</code> دانلود کن (ترجیحاً پروژه‌ای با نقشه‌ی سازه) و:</p>
+      <ol>
+        <li><code>Title Block</code> هر برگه را بخوان: شماره، <code>Revision</code>، مقیاس، <code>Status</code>.</li>
+        <li>روی <code>GA Plan</code>، ده علامت یا نوشته پیدا کن و تک‌تک را رمزگشایی کن.</li>
+        <li>یک <code>Section Mark</code> را از پلان تا برگه‌ی برش دنبال کن و مسیر را یادداشت کن.</li>
+        <li>اگر نقشه‌ی <code>RC</code> دارد، سه <code>Rebar Notation</code> را کامل ترجمه کن.</li>
+        <li>ترازها را پیدا کن: <code>SSL</code> کجاست، <code>FFL</code> کجاست، اختلافشان چقدر است؟</li>
+        <li>واژه‌نامه‌ی شخصی‌ات را در <code>Excel</code> شروع کن: ستون‌های <code>Symbol / Meaning / Example</code> — این فایل تا آخر مسیر بزرگ می‌شود.</li>
+      </ol>
+      <p><b>خروجی:</b> یک <code>Report</code> کوتاه (حتی دست‌نویس تمیز) + فایل واژه‌نامه. این اولین سند ایستگاه <code>S0</code> برای <code>Portfolio</code> است. 📁</p>
+    </div>
+
+    <h3><span class="mark">◆</span>0.8.2 — Quiz</h3>
+    <div class="example">
+      <div class="example-title">📝 به این ۶ سؤال جواب بده</div>
+      <p><b>Q1.</b> فرق <code>PDF</code> و <code>DWG</code> چیست و کدام «سند رسمی» حساب می‌شود؟</p>
+      <p><b>Q2.</b> <code>457×191×67 UB, S355</code> را کلمه‌به‌کلمه ترجمه کن.</p>
+      <p><b>Q3.</b> <code>SSL</code> و <code>FFL</code> چه فرقی دارند و چرا قاطی کردنشان خطرناک است؟</p>
+      <p><b>Q4.</b> <code>16H12-150-T1</code> یعنی چه؟ این میلگرد کجای مقطع است و چرا آنجاست؟</p>
+      <p><b>Q5.</b> روی یک <code>Detail</code> نوشته <code>NTS</code> — اجازه داری از رویش اندازه بگیری؟ پس اندازه را از کجا بفهمی؟</p>
+      <p><b>Q6.</b> در ساختمان <code>TB-01</code>، ستون تقاطع گرید <code>C</code> و <code>2</code> را چه صدا می‌زنیم؟ و بسته‌ی نقشه‌ی کامل <code>TB-01</code> حداقل شامل چه برگه‌هایی است؟</p>
+    </div>
+    <p>جواب‌ها را در چت بنویس تا با هم مرور کنیم.</p>
+
+    <div class="keybox">
+      <div class="keybox-title">✅ بعد از این فایل کجا می‌روی؟</div>
+      <p>ایستگاه بعدی شاخه‌ی <code>2.2</code>: <code>Bluebeam Revu</code> — ابزار <code>PDF</code> همین مهارتی که الان ساختی. فایلش آماده است: <code>Software 01 — Bluebeam Revu</code>. و فراموش نکن شاخه‌ی <code>2.1 — Excel</code> از همین امروز موازی شروع می‌شود — واژه‌نامه‌ات اولین فایل <code>Excel</code> توست.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  SOFTWARE S0 · DRAWING READING · PDF &amp; DWG · NEXT: S1 BLUEBEAM REVU ∥ BRANCH 2.1 EXCEL
+</footer>
+
+</div>
+</body>
+</html>

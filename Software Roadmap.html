@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Roadmap — مسیر ۲ · Graduate Structural Engineer (UK)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1319;
+    --card:#141C25;
+    --card-head:#1B2733;
+    --ink:#F2F5F8;
+    --ink-soft:#C7D3DE;
+    --accent:#FF7A5C;      /* نارنجی: ایستگاه‌های شاخه‌ی 2.2 */
+    --steel:#7CC7F0;       /* آبی روشن: اصطلاحات انگلیسی */
+    --gold:#F2C14E;        /* طلایی: شاخه‌ی 2.1 — Excel */
+    --green:#7ADFA0;       /* سبز: ساب‌هدینگ‌ها و خروجی‌ها */
+    --purple:#C9A6F5;      /* بنفش: Portfolio */
+    --line:#2A3945;
+    --code-bg:#0F2233;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;
+    font-weight:500;
+    line-height:2.15;
+    padding:20px 12px 70px;
+  }
+
+  code{
+    font-family:'IBM Plex Mono',monospace;
+    direction:ltr;
+    unicode-bidi:isolate;
+    display:inline-block;
+    background:var(--code-bg);
+    border:1px solid #2E4A63;
+    border-radius:6px;
+    padding:0 8px;
+    font-size:.84em;
+    font-weight:600;
+    color:var(--steel);
+    line-height:1.9;
+    vertical-align:baseline;
+    white-space:nowrap;
+  }
+
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:34px 30px;
+    margin-bottom:26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:.72rem;font-weight:600;letter-spacing:.15em;
+    color:var(--accent);margin-bottom:16px;
+  }
+  h1{font-size:1.75rem;font-weight:900;line-height:1.8;color:#FFFFFF;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .subtitle{color:var(--ink-soft);font-size:1rem;font-weight:500;margin-top:10px;}
+  .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+  .meta div{
+    background:var(--card-head);border:1px solid var(--line);
+    border-radius:10px;padding:12px 16px;font-size:.9rem;font-weight:700;
+  }
+  .meta b{display:block;font-size:.72rem;font-weight:600;color:var(--steel);margin-bottom:2px;}
+
+  .legend{
+    display:flex;gap:22px;flex-wrap:wrap;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 22px;margin-bottom:34px;font-size:.88rem;font-weight:700;
+  }
+  .dot{width:13px;height:13px;border-radius:4px;display:inline-block;margin-inline-end:8px;vertical-align:-1px;}
+  .dot.core{background:var(--accent);}
+  .dot.plus{background:var(--gold);}
+  .dot.cap{background:var(--purple);}
+
+  /* ===== نقشه‌ی کلی مسیرها ===== */
+  .flow{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 18px;margin-bottom:34px;
+  }
+  .flow-title{
+    font-size:1.05rem;font-weight:900;color:#FFFFFF;margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .flow-title::before{content:"🗺";font-size:1rem;}
+  .flow .figure{
+    background:#0A1016;border:1px solid var(--line);border-radius:12px;
+    padding:14px;overflow-x:auto;
+  }
+  .flow svg{min-width:660px;width:100%;height:auto;display:block;}
+  .flow .figcap{
+    font-size:.8rem;font-weight:700;color:var(--steel);
+    margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;
+  }
+
+  /* ===== فهرست مطالب ===== */
+  .toc{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:24px 26px;margin-bottom:34px;
+  }
+  .toc-title{
+    font-size:1.05rem;font-weight:900;color:#FFFFFF;margin-bottom:16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .toc-title::before{content:"☰";color:var(--accent);font-size:1rem;}
+  .toc ol{list-style:none;}
+  .toc li{padding:9px 0;border-bottom:1px dashed var(--line);}
+  .toc li:last-child{border-bottom:none;}
+  .toc a{
+    text-decoration:none;color:var(--ink);font-weight:800;font-size:.93rem;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .toc a:hover{color:var(--steel);}
+  .toc .tnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    color:var(--accent);font-weight:700;font-size:.75rem;min-width:36px;
+  }
+  .toc li.tplus .tnum{color:var(--gold);}
+  .toc li.tcap .tnum{color:var(--purple);}
+  .toc .subs{
+    font-size:.8rem;font-weight:500;color:var(--ink-soft);
+    margin-top:2px;padding-inline-start:46px;line-height:1.9;
+  }
+
+  .phase{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:30px;
+    overflow:hidden;
+  }
+  .phase-head{
+    background:var(--card-head);
+    border-bottom:2px solid var(--accent);
+    padding:18px 24px;
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .phase.plus .phase-head{border-bottom-color:var(--gold);}
+  .phase.cap .phase-head{border-bottom-color:var(--purple);}
+  .pnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    background:var(--accent);color:#101820;
+    font-weight:700;font-size:.85rem;
+    padding:4px 12px;border-radius:7px;white-space:nowrap;
+  }
+  .phase.plus .pnum{background:var(--gold);}
+  .phase.cap .pnum{background:var(--purple);}
+  h2{font-size:1.18rem;font-weight:800;color:#FFFFFF;flex:1;min-width:200px;}
+  .tag{font-size:.72rem;font-weight:700;padding:3px 14px;border-radius:99px;white-space:nowrap;}
+  .tag.core{background:rgba(255,122,92,.15);color:var(--accent);border:1px solid var(--accent);}
+  .tag.plus{background:rgba(242,193,78,.15);color:var(--gold);border:1px solid var(--gold);}
+  .tag.cap{background:rgba(201,166,245,.15);color:var(--purple);border:1px solid var(--purple);}
+
+  .phase-body{padding:22px 24px 26px;}
+
+  .why{
+    background:rgba(124,199,240,.07);
+    border-inline-start:4px solid var(--steel);
+    border-radius:0 8px 8px 0;
+    padding:12px 18px;
+    margin-bottom:22px;
+    font-size:.92rem;font-weight:600;color:var(--ink-soft);
+  }
+  .why b{color:var(--steel);font-weight:800;}
+
+  h3{
+    font-size:1rem;font-weight:800;color:var(--green);
+    margin:22px 0 12px;padding-bottom:6px;
+    border-bottom:1px dashed var(--line);
+    display:flex;align-items:center;gap:10px;
+  }
+  h3::before{content:"◆";font-size:.7rem;color:var(--green);}
+  .phase-body h3:first-of-type{margin-top:0;}
+
+  dl{margin:0;}
+  dt{
+    font-weight:800;color:var(--ink);font-size:.95rem;
+    margin-top:14px;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  dt::before{content:"▸";color:var(--accent);font-size:.8rem;}
+  .phase.plus dt::before{color:var(--gold);}
+  .phase.cap dt::before{color:var(--purple);}
+  dd{
+    color:var(--ink-soft);font-size:.9rem;font-weight:500;
+    margin:2px 24px 0 0;padding-inline-start:20px;
+    border-inline-start:2px solid var(--line);
+  }
+
+  .deliver{
+    margin-top:24px;
+    background:rgba(122,223,160,.07);
+    border:1.5px solid var(--green);
+    border-radius:12px;
+    padding:16px 20px;
+  }
+  .deliver-title{
+    font-size:.95rem;font-weight:900;color:var(--green);
+    display:flex;align-items:center;gap:10px;margin-bottom:8px;
+  }
+  .deliver-title::before{content:"🛠";font-size:1rem;}
+  .deliver p{font-size:.9rem;font-weight:500;color:var(--ink-soft);}
+  .deliver p b{color:var(--ink);font-weight:800;}
+  .deliver .out{
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+    font-size:.85rem;font-weight:700;color:var(--green);
+  }
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--green);
+    border-radius:14px;
+    padding:26px 28px;
+    margin-top:8px;
+  }
+  .summary h2{color:var(--green);font-size:1.1rem;margin-bottom:14px;}
+  .summary p{font-size:.93rem;font-weight:500;color:var(--ink-soft);margin-bottom:12px;}
+  .summary p:last-child{margin-bottom:0;}
+  .summary b{color:var(--ink);font-weight:800;}
+
+  table{
+    width:100%;border-collapse:collapse;margin:14px 0;font-size:.87rem;
+  }
+  th{
+    background:var(--card-head);color:var(--steel);font-weight:800;
+    padding:8px 12px;border:1px solid var(--line);text-align:right;
+  }
+  td{padding:8px 12px;border:1px solid var(--line);color:var(--ink-soft);}
+
+  footer{
+    text-align:center;margin-top:34px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    font-size:.7rem;font-weight:600;letter-spacing:.15em;color:#5A6C7C;
+  }
+
+  @media(max-width:600px){
+    body{font-size:15px;}
+    header,.phase-body{padding:22px 16px;}
+    .phase-head{padding:14px 16px;}
+    .meta{grid-template-columns:1fr;}
+    dd{margin:2px 12px 0 0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================================================== -->
+<header>
+  <div class="eyebrow"><span>SOFTWARE ROADMAP · PATH 2 · REV A</span><span>UK PRACTICE · TB-01</span></div>
+  <h1>Roadmap مسیر ۲ — <em>Software</em></h1>
+  <p class="subtitle">مسیر یادگیری نرم‌افزار، موازی با مسیر ۱ (<b>Theory</b>). دو شاخه دارد: شاخه‌ی <code>2.1</code> — <code>Excel</code> که از روز اول تا انتها ادامه دارد، و شاخه‌ی <code>2.2</code> — زنجیره‌ی نرم‌افزارهای نقشه و طراحی. تمام تمرین‌ها روی ساختمان تمرینی <code>TB-01</code> انجام می‌شوند و مستقیم وارد <code>Portfolio</code> می‌روند.</p>
+  <div class="meta">
+    <div><b>ساختار</b>۲ شاخه‌ی موازی · ۶ ایستگاه</div>
+    <div><b>زمان کل</b><code>≈ 100 – 130 h</code></div>
+    <div><b>قانون پیشروی</b>Quiz + خروجی عملی هر ایستگاه</div>
+  </div>
+</header>
+
+<div class="legend">
+  <span><span class="dot core"></span>شاخه‌ی 2.2 — زنجیره‌ی اصلی</span>
+  <span><span class="dot plus"></span>شاخه‌ی 2.1 — Excel (موازی و ادامه‌دار)</span>
+  <span><span class="dot cap"></span>Portfolio — TB-01</span>
+</div>
+
+<!-- ================================================== نقشه‌ی مسیرها -->
+<div class="flow">
+  <div class="flow-title">نقشه‌ی کلی مسیرها</div>
+  <div class="figure">
+    <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF7A5C"/></marker>
+        <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#F2C14E"/></marker>
+      </defs>
+      <g font-family="IBM Plex Mono, monospace">
+        <!-- Lane 1: Theory -->
+        <text x="14" y="38" fill="#7CC7F0" font-size="11" font-weight="700">PATH 1</text>
+        <rect x="80" y="16" width="766" height="44" rx="10" fill="#1B2733" stroke="#7CC7F0" stroke-width="1.5"/>
+        <text x="463" y="43" fill="#F2F5F8" font-size="13" font-weight="700" text-anchor="middle">Structural Engineering Theory — Phase 0 → 17</text>
+
+        <!-- Path 2 bracket -->
+        <text x="14" y="120" fill="#FF7A5C" font-size="11" font-weight="700">PATH 2</text>
+        <text x="14" y="138" fill="#FF7A5C" font-size="11" font-weight="700">SOFTWARE</text>
+        <line x1="70" y1="92" x2="70" y2="286" stroke="#FF7A5C" stroke-width="2"/>
+
+        <!-- Lane 2: Branch 2.1 Excel -->
+        <text x="88" y="112" fill="#F2C14E" font-size="10.5" font-weight="700">2.1</text>
+        <rect x="120" y="90" width="726" height="42" rx="10" fill="#1B2733" stroke="#F2C14E" stroke-width="1.5"/>
+        <text x="483" y="116" fill="#F2F5F8" font-size="13" font-weight="700" text-anchor="middle">Excel — از روز اول، موازی، تا انتهای مسیر</text>
+
+        <!-- Lane 3: Branch 2.2 chain -->
+        <text x="88" y="182" fill="#FF7A5C" font-size="10.5" font-weight="700">2.2</text>
+
+        <rect x="120" y="158" width="170" height="52" rx="10" fill="#1B2733" stroke="#FF7A5C" stroke-width="1.5"/>
+        <text x="205" y="180" fill="#F2F5F8" font-size="12" font-weight="700" text-anchor="middle">Drawing Reading</text>
+        <text x="205" y="198" fill="#7CC7F0" font-size="10" text-anchor="middle">pdf &amp; dwg</text>
+
+        <line x1="295" y1="184" x2="318" y2="184" stroke="#FF7A5C" stroke-width="2" marker-end="url(#ar)"/>
+
+        <rect x="322" y="146" width="160" height="36" rx="9" fill="#1B2733" stroke="#FF7A5C" stroke-width="1.5"/>
+        <text x="402" y="169" fill="#F2F5F8" font-size="11.5" font-weight="700" text-anchor="middle">Bluebeam Revu · pdf</text>
+        <rect x="322" y="190" width="160" height="36" rx="9" fill="#1B2733" stroke="#FF7A5C" stroke-width="1.5"/>
+        <text x="402" y="213" fill="#F2F5F8" font-size="11.5" font-weight="700" text-anchor="middle">AutoCAD 2D · dwg</text>
+
+        <line x1="487" y1="184" x2="510" y2="184" stroke="#FF7A5C" stroke-width="2" marker-end="url(#ar)"/>
+
+        <rect x="514" y="158" width="130" height="52" rx="10" fill="#1B2733" stroke="#FF7A5C" stroke-width="1.5"/>
+        <text x="579" y="189" fill="#F2F5F8" font-size="12.5" font-weight="700" text-anchor="middle">Revit</text>
+
+        <line x1="649" y1="184" x2="672" y2="184" stroke="#FF7A5C" stroke-width="2" marker-end="url(#ar)"/>
+
+        <rect x="676" y="158" width="170" height="52" rx="10" fill="#1B2733" stroke="#FF7A5C" stroke-width="1.5"/>
+        <text x="761" y="180" fill="#F2F5F8" font-size="12" font-weight="700" text-anchor="middle">Tekla Structural</text>
+        <text x="761" y="198" fill="#F2F5F8" font-size="12" font-weight="700" text-anchor="middle">Designer</text>
+
+        <!-- Portfolio bar -->
+        <rect x="120" y="244" width="726" height="42" rx="10" fill="#1B2733" stroke="#C9A6F5" stroke-width="1.5"/>
+        <text x="483" y="270" fill="#F2F5F8" font-size="13" font-weight="700" text-anchor="middle">Portfolio — TB-01 · خروجی هر ایستگاه همین‌جا جمع می‌شود</text>
+      </g>
+    </svg>
+  </div>
+  <div class="figcap">شکل ۱ — سه خط موازی: مسیر ۱ (Theory) جدا پیش می‌رود؛ مسیر ۲ (Software) دو شاخه دارد که هم‌زمان جلو می‌روند و خروجی‌هایشان در Portfolio جمع می‌شود.</div>
+</div>
+
+<!-- ================================================== فهرست مطالب -->
+<nav class="toc">
+  <div class="toc-title">فهرست ایستگاه‌ها</div>
+  <ol>
+    <li class="tplus">
+      <a href="#s21"><span class="tnum">2.1</span>Excel — شاخه‌ی موازی، از روز اول تا انتها</a>
+      <div class="subs">مبانی · توابع طراحی · Design Spreadsheet · 🛠 Load Takedown Sheet ⭐</div>
+    </li>
+    <li>
+      <a href="#s0"><span class="tnum">S0</span>Drawing Reading — نقشه‌خوانی (pdf &amp; dwg)</a>
+      <div class="subs">اجزای نقشه · انواع نقشه · Steel و RC · مخفف‌ها · 🛠 Drawing Decode Report</div>
+    </li>
+    <li>
+      <a href="#s1"><span class="tnum">S1</span>Bluebeam Revu — کار با PDF نقشه</a>
+      <div class="subs">Markup · Calibrate &amp; Measure ⭐ · Compare · 🛠 Marked-up Drawing</div>
+    </li>
+    <li>
+      <a href="#s2"><span class="tnum">S2</span>AutoCAD 2D — کار با DWG</a>
+      <div class="subs">Layers · Xref · Model/Paper Space · Plot · 🛠 TB-01 GA Drawing</div>
+    </li>
+    <li>
+      <a href="#s3"><span class="tnum">S3</span>Revit — BIM Modelling</a>
+      <div class="subs">Levels &amp; Grids · Modelling · Sheets &amp; Schedules · 🛠 TB-01 Revit Model ⭐</div>
+    </li>
+    <li>
+      <a href="#s4"><span class="tnum">S4</span>Tekla Structural Designer — Analysis &amp; Design</a>
+      <div class="subs">Model · Load · Analyse · Design · Report · 🛠 TB-01 Design Report ⭐</div>
+    </li>
+    <li class="tcap">
+      <a href="#sp"><span class="tnum">SP</span>Portfolio — بستن TB-01 در یک PDF</a>
+      <div class="subs">Cover · Contents · Concept → Drawings · 🛠 Final Portfolio ⭐⭐⭐</div>
+    </li>
+  </ol>
+</nav>
+
+<!-- ================================================== 2.1 EXCEL -->
+<section class="phase plus" id="s21">
+  <div class="phase-head"><span class="pnum">BRANCH 2.1</span><h2>Excel — شاخه‌ی موازی</h2><span class="tag plus">موازی · ادامه‌دار</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا شاخه‌ی جدا؟</b> چون <code>Excel</code> ایستگاه نیست — جاده است. از روز اول شروع می‌شود و تا انتهای مسیر (و تا انتهای دوران کاری‌ات) ادامه دارد. یک <code>Graduate</code> در دفتر بیشتر از هر نرم‌افزار دیگری با <code>Excel</code> کار می‌کند.</div>
+    <dl>
+      <dt>مرحله‌ی اول — مبانی</dt>
+      <dd>محیط، <code>References ($)</code>، توابع پایه (<code>IF, MIN, MAX, ROUND</code>) — هم‌زمان با <code>S0</code>.</dd>
+      <dt>مرحله‌ی دوم — توابع طراحی</dt>
+      <dd><code>XLOOKUP / INDEX+MATCH</code> برای جدول مقاطع، <code>Data Validation</code>، <code>Conditional Formatting</code> — هم‌زمان با <code>S1</code> و <code>S2</code>.</dd>
+      <dt>مرحله‌ی سوم — Design Spreadsheet</dt>
+      <dd>ساخت اولین <code>Design Sheet</code> واقعی: ورودی، محاسبه، خروجی <code>Pass/Fail</code> — هم‌زمان با <code>S3</code> و <code>S4</code> و درس‌های <code>Loading</code> مسیر ۱.</dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این شاخه</div>
+      <p><b>TB-01 Load Takedown Spreadsheet</b> برای <code>Column B2</code> از <code>Roof</code> تا <code>Foundation</code> + یک <code>Beam Design Sheet</code> با چراغ <code>Pass/Fail</code>.</p>
+      <p class="out">📁 خروجی: 2 فایل Excel + نسخه‌ی PDF برای Portfolio · فایل آموزشی: Software — Excel</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S0 -->
+<section class="phase" id="s0">
+  <div class="phase-head"><span class="pnum">S0</span><h2>Drawing Reading — نقشه‌خوانی (pdf &amp; dwg)</h2><span class="tag core">شروع شاخه‌ی 2.2</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا اول؟</b> نقشه‌خوانی نرم‌افزار نیست، مهارت است — ولی همه‌ی نرم‌افزارهای بعدی روی آن سوارند. اگر ندانی <code>SSL</code> یا <code>H16-200-B1</code> یعنی چه، هیچ نرم‌افزاری نجاتت نمی‌دهد.</div>
+    <dl>
+      <dt>اجزای هر نقشه</dt>
+      <dd><code>Title Block</code> · <code>Revision</code> · <code>Status Codes (ISO 19650)</code> · <code>Scale</code> · <code>North Arrow</code></dd>
+      <dt>انواع نقشه</dt>
+      <dd><code>GA Plan</code> · <code>Sections</code> · <code>Details</code> · <code>Foundation Plan</code> · <code>Schedules</code></dd>
+      <dt>Grids و Levels</dt>
+      <dd><code>Grid References</code> · <code>SSL / FFL / TOS / TOC / AOD</code> · <code>Setting Out</code></dd>
+      <dt>نقشه‌های Steel و RC</dt>
+      <dd>مقاطع <code>UB/UC/PFC/SHS</code> · اتصالات و جوش · <code>Rebar Notation</code> · <code>BS 8666</code></dd>
+      <dt>مخفف‌ها و قراردادها</dt>
+      <dd><code>TYP · NTS · U.N.O. · C/C</code> · انواع خط · <code>Hatching</code> · <code>Cross-referencing</code></dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این ایستگاه</div>
+      <p><b>Drawing Decode Report:</b> یک نقشه‌ی واقعی از <code>Planning Portal</code> بردار و تک‌تک علامت‌ها و مخفف‌هایش را رمزگشایی کن + واژه‌نامه‌ی شخصی‌ات را در <code>Excel</code> شروع کن.</p>
+      <p class="out">📁 خروجی: 1 Report + شروع واژه‌نامه · زمان: ≈ 15–20 h · فایل آموزشی: Software — Drawing Reading</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S1 -->
+<section class="phase" id="s1">
+  <div class="phase-head"><span class="pnum">S1</span><h2>Bluebeam Revu — کار با PDF نقشه</h2><span class="tag core">شاخه‌ی 2.2</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا اینجا؟</b> ابزارِ همان مهارتی است که در <code>S0</code> ساختی. نقشه در دفتر یا <code>PDF</code> است یا <code>DWG</code> — این ایستگاه سمت <code>PDF</code> را می‌بندد و سریع‌ترین بازده‌ی کل مسیر را دارد.</div>
+    <dl>
+      <dt>Markup</dt>
+      <dd><code>Cloud</code> · <code>Callout</code> · <code>Text</code> · <code>Stamps</code> · <code>Tool Chest</code></dd>
+      <dt>Calibrate &amp; Measurement ⭐</dt>
+      <dd>اول <code>Calibrate</code>، بعد <code>Length / Area / Count</code> — بدون <code>Calibrate</code> همه‌ی اعداد غلط‌اند.</dd>
+      <dt>Compare &amp; Overlay</dt>
+      <dd>پیدا کردن خودکار تفاوت دو <code>Revision</code> · انداختن سازه روی معماری</dd>
+      <dt>Sets · Markups List · Flatten</dt>
+      <dd>مدیریت بسته‌ی نقشه · گزارش کامنت‌ها · قفل کردن قبل از ارسال</dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این ایستگاه</div>
+      <p><b>Marked-up Drawing:</b> نقشه‌ی <code>Load Path Study</code> ات را <code>Calibrate</code> کن، اندازه بگیر، <code>Cloud</code> و <code>Callout</code> بگذار و <code>Flatten</code> کن.</p>
+      <p class="out">📁 خروجی: 1 PDF · زمان: ≈ 8–10 h · فایل آموزشی: Software 01 — Bluebeam Revu ✅ (آماده)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S2 -->
+<section class="phase" id="s2">
+  <div class="phase-head"><span class="pnum">S2</span><h2>AutoCAD 2D — کار با DWG</h2><span class="tag core">شاخه‌ی 2.2</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا اینجا؟</b> نیمه‌ی دوم نقشه‌خوانی: فایل‌های <code>DWG</code>. فقط <code>2D</code> — و فقط در حد پایه؛ چون <code>Revit</code> جای آن را در مدل‌سازی گرفته ولی <code>Details</code> و نقشه‌های قدیمی هنوز <code>DWG</code> هستند.</div>
+    <dl>
+      <dt>خواندن و حرکت</dt>
+      <dd>باز کردن <code>DWG</code> · <code>Layers</code> · <code>Xref</code> · اندازه‌گیری <code>Distance / Area</code></dd>
+      <dt>ترسیم پایه</dt>
+      <dd><code>Line / Polyline / Offset / Trim / Copy / Mirror</code> · <code>Dimensions</code> · <code>Hatch</code> · <code>Text</code></dd>
+      <dt>خروجی گرفتن</dt>
+      <dd><code>Model Space</code> و <code>Paper Space</code> · <code>Viewport</code> و <code>Scale</code> · <code>Plot to PDF</code></dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این ایستگاه</div>
+      <p><b>TB-01 GA Drawing:</b> پلان <code>GA</code> طبقه‌ی همکف <code>TB-01</code> را در <code>1:100</code> بکش (<code>Grid A–D / 1–3</code>، ستون‌ها، تیرها، <code>Bracing</code>) + یک <code>Section</code> و یک <code>Pad Foundation Detail</code>.</p>
+      <p class="out">📁 خروجی: 3 Drawings با Title Block · زمان: ≈ 10–15 h · فایل آموزشی: Software 02 — AutoCAD 2D (بعداً)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S3 -->
+<section class="phase" id="s3">
+  <div class="phase-head"><span class="pnum">S3</span><h2>Revit — BIM Modelling</h2><span class="tag core">شاخه‌ی 2.2</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا اینجا؟</b> پرتقاضاترین نرم‌افزار آگهی‌های شغلی <code>UK</code>. حالا که نقشه را می‌فهمی و کشیده‌ای، وقت مدل‌سازی است — <code>Revit</code> همان نقشه‌ها را از روی مدل خودکار تولید می‌کند.</div>
+    <dl>
+      <dt>اسکلت مدل</dt>
+      <dd><code>Levels</code> و <code>Grids</code> · <code>Link CAD / Revit</code> · انتخاب <code>Discipline: Structural</code></dd>
+      <dt>مدل‌سازی</dt>
+      <dd><code>Columns</code> · <code>Framing (Beams)</code> · <code>Floors</code> · <code>Walls</code> · <code>Foundations</code> · <code>Families (UB/UC)</code></dd>
+      <dt>خروجی</dt>
+      <dd><code>Views</code> · <code>Sheets</code> · <code>Schedules</code> · <code>Annotation</code> · <code>Export IFC / DWG / PDF</code></dd>
+      <dt>مفاهیم BIM</dt>
+      <dd><code>ISO 19650</code> · <code>CDE</code> · <code>Federated Model</code> · <code>Clash Detection</code> · <code>LOD</code></dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این ایستگاه ⭐</div>
+      <p><b>TB-01 Revit Model:</b> کل ساختمان را مدل کن و از آن <code>Sheets</code> بگیر: <code>GA Plans</code>، <code>Section</code>، <code>3D View</code> و یک <code>Column Schedule</code>.</p>
+      <p class="out">📁 خروجی: Model + 4 Sheets (PDF) · زمان: ≈ 30–40 h · فایل آموزشی: Software 03 — Revit (بعداً)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== S4 -->
+<section class="phase" id="s4">
+  <div class="phase-head"><span class="pnum">S4</span><h2>Tekla Structural Designer — Analysis &amp; Design</h2><span class="tag core">پایان شاخه‌ی 2.2</span></div>
+  <div class="phase-body">
+    <div class="why"><b>چرا آخر؟</b> چون خطرناک‌ترین ایستگاه است: نرم‌افزار تحلیل بدون فهم مهندسی یعنی <code>Garbage In, Garbage Out</code>. این ایستگاه را شروع نکن تا وقتی در مسیر ۱ به <code>Loading (P6)</code> رسیده باشی.</div>
+    <dl>
+      <dt>Model</dt>
+      <dd><code>Levels / Grids</code> · <code>Members</code> · <code>Supports</code> · <code>Materials &amp; Sections</code></dd>
+      <dt>Load</dt>
+      <dd><code>Loadcases (Dead / Imposed / Wind)</code> طبق <code>EN 1991</code> · <code>Combinations</code> طبق <code>EN 1990</code></dd>
+      <dt>Analyse &amp; Design</dt>
+      <dd>اجرای <code>Analysis</code> · خواندن <code>BMD / SFD / Deflection</code> · <code>Design</code> و <code>Utilisation ≤ 1.0</code></dd>
+      <dt>Report</dt>
+      <dd><code>Member Design Calcs</code> · <code>Model Report</code> · مقایسه با <code>Hand Calcs</code></dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی این ایستگاه ⭐</div>
+      <p><b>TB-01 Design Report:</b> مدل کامل، بارگذاری، تحلیل و طراحی + <b>جدول مقایسه‌ی</b> <code>Hand Calc vs TSD</code> برای <code>Beam B2–C2</code> و <code>Column B2</code>. اگر اعداد فرق داشتند، دلیلش را بنویس — همین یک صفحه در <code>Interview</code> بیشترین حرف را می‌زند.</p>
+      <p class="out">📁 خروجی: Design Report + Comparison Table · زمان: ≈ 20–25 h · فایل آموزشی: Software 04 — TSD (بعداً)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== SP -->
+<section class="phase cap" id="sp">
+  <div class="phase-head"><span class="pnum">SP</span><h2>Portfolio — بستن TB-01 در یک PDF</h2><span class="tag cap">Portfolio</span></div>
+  <div class="phase-body">
+    <div class="why"><b>قانون:</b> بعد از هر ایستگاه خروجی‌اش را ذخیره کن؛ اگر بگذاری برای آخر، هیچ‌وقت ساخته نمی‌شود. این ایستگاه فقط «بستن» است، نه «ساختن».</div>
+    <dl>
+      <dt>ساختار سند</dt>
+      <dd><code>Cover</code> + معرفی <code>TB-01</code> · <code>Contents</code> · ترتیب: <code>Concept → Loading → Analysis → Design → Drawings</code></dd>
+      <dt>قواعد</dt>
+      <dd>زیر هر خروجی یک جمله: چه کردی و با چه ابزاری · حجم زیر <code>10 MB</code> · یک نسخه در <code>LinkedIn Featured</code></dd>
+    </dl>
+    <div class="deliver">
+      <div class="deliver-title">خروجی نهایی ⭐⭐⭐</div>
+      <p><b>Final Software Portfolio:</b> یک <code>PDF</code> واحد (با <code>Bluebeam</code> ببندش) شامل همه‌ی خروجی‌های <code>2.1</code> و <code>S0</code> تا <code>S4</code> — سندی که در <code>CV</code> و <code>Interview</code> از تو دفاع می‌کند.</p>
+      <p class="out">📁 خروجی: 1 PDF · این سند کنار Capstone مسیر ۱ می‌نشیند</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== جمع‌بندی -->
+<section class="summary">
+  <h2>قواعد پیشروی این مسیر</h2>
+  <p><b>۱ — دو شاخه هم‌زمان:</b> هر روز که روی شاخه‌ی <code>2.2</code> کار می‌کنی، <code>Excel</code> هم کنارش زنده است. لازم نیست جدا وقت بزرگی بگذاری — تمرین‌های <code>Excel</code> از دل همان ایستگاه‌ها درمی‌آیند.</p>
+  <p><b>۲ — قفل هماهنگی با مسیر ۱:</b> <code>S0</code> تا <code>S3</code> را هر وقت خواستی برو؛ ولی <code>S4 (TSD)</code> قفل است تا وقتی در مسیر ۱ به <code>P6 — Loading</code> برسی. مدل‌سازی دانش سازه نمی‌خواهد، تحلیل می‌خواهد.</p>
+  <p><b>۳ — هر ایستگاه یک فایل آموزشی:</b> مثل فایل‌های <code>Phase</code> در مسیر ۱، هر ایستگاه یک فایل درسی جدا دارد. تا الان: <code>Software — Drawing Reading</code>، <code>Software 01 — Bluebeam</code> و <code>Software — Excel</code> آماده‌اند؛ بقیه به ترتیب ساخته می‌شوند.</p>
+  <p><b>۴ — هیچ ایستگاهی بدون خروجی تمام نمی‌شود:</b> خروجی هر ایستگاه همان لحظه وارد پوشه‌ی <code>Portfolio</code> می‌شود.</p>
+</section>
+
+<footer>
+  PATH 2 · SOFTWARE ROADMAP · REV A · BRANCH 2.1 EXCEL ∥ BRANCH 2.2 S0→S4 · TB-01
+</footer>
+
+</div>
+</body>
+</html>

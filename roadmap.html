@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap نهایی — Graduate Structural Engineer (UK) · نسخه‌ی عملی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1319;
+    --card:#141C25;
+    --card-head:#1B2733;
+    --ink:#F2F5F8;
+    --ink-soft:#C7D3DE;
+    --accent:#FF7A5C;      /* نارنجی: فازهای هسته */
+    --steel:#7CC7F0;       /* آبی روشن: اصطلاحات انگلیسی */
+    --gold:#F2C14E;        /* طلایی: فازهای مزیت */
+    --green:#7ADFA0;       /* سبز: ساب‌هدینگ‌ها */
+    --purple:#C9A6F5;      /* بنفش: پروژه‌ی Capstone */
+    --line:#2A3945;
+    --code-bg:#0F2233;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    font-size:16px;
+    font-weight:500;
+    line-height:2.15;
+    padding:20px 12px 70px;
+  }
+
+  /* اصطلاحات انگلیسی — isolate مانع به‌هم‌ریختن جمله‌ی فارسی می‌شود */
+  code{
+    font-family:'IBM Plex Mono',monospace;
+    direction:ltr;
+    unicode-bidi:isolate;
+    display:inline-block;
+    background:var(--code-bg);
+    border:1px solid #2E4A63;
+    border-radius:6px;
+    padding:0 8px;
+    font-size:.84em;
+    font-weight:600;
+    color:var(--steel);
+    line-height:1.9;
+    vertical-align:baseline;
+    white-space:nowrap;
+  }
+
+  .wrap{max-width:900px;margin:0 auto;}
+
+  header{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:34px 30px;
+    margin-bottom:26px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:.72rem;font-weight:600;letter-spacing:.15em;
+    color:var(--accent);margin-bottom:16px;
+  }
+  h1{font-size:1.75rem;font-weight:900;line-height:1.8;color:#FFFFFF;}
+  h1 em{font-style:normal;color:var(--accent);}
+  .subtitle{color:var(--ink-soft);font-size:1rem;font-weight:500;margin-top:10px;}
+  .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+  .meta div{
+    background:var(--card-head);border:1px solid var(--line);
+    border-radius:10px;padding:12px 16px;font-size:.9rem;font-weight:700;
+  }
+  .meta b{display:block;font-size:.72rem;font-weight:600;color:var(--steel);margin-bottom:2px;}
+
+  .legend{
+    display:flex;gap:22px;flex-wrap:wrap;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 22px;margin-bottom:34px;font-size:.88rem;font-weight:700;
+  }
+  .dot{width:13px;height:13px;border-radius:4px;display:inline-block;margin-inline-end:8px;vertical-align:-1px;}
+  .dot.core{background:var(--accent);}
+  .dot.plus{background:var(--gold);}
+  .dot.cap{background:var(--purple);}
+
+  /* ===== فهرست مطالب ===== */
+  .toc{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:24px 26px;margin-bottom:34px;
+  }
+  .toc-title{
+    font-size:1.05rem;font-weight:900;color:#FFFFFF;margin-bottom:16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .toc-title::before{content:"☰";color:var(--accent);font-size:1rem;}
+  .toc ol{list-style:none;counter-reset:none;}
+  .toc li{padding:9px 0;border-bottom:1px dashed var(--line);}
+  .toc li:last-child{border-bottom:none;}
+  .toc a{
+    text-decoration:none;color:var(--ink);font-weight:800;font-size:.93rem;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .toc a:hover{color:var(--steel);}
+  .toc .tnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    color:var(--accent);font-weight:700;font-size:.75rem;min-width:36px;
+  }
+  .toc li.tplus .tnum{color:var(--gold);}
+  .toc li.tcap .tnum{color:var(--purple);}
+  .toc .subs{
+    font-size:.8rem;font-weight:500;color:var(--ink-soft);
+    margin-top:2px;padding-inline-start:46px;line-height:1.9;
+  }
+
+  .phase{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:30px;
+    overflow:hidden;
+  }
+  .phase-head{
+    background:var(--card-head);
+    border-bottom:2px solid var(--accent);
+    padding:18px 24px;
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .phase.plus .phase-head{border-bottom-color:var(--gold);}
+  .phase.cap .phase-head{border-bottom-color:var(--purple);}
+  .pnum{
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    background:var(--accent);color:#101820;
+    font-weight:700;font-size:.85rem;
+    padding:4px 12px;border-radius:7px;white-space:nowrap;
+  }
+  .phase.plus .pnum{background:var(--gold);}
+  .phase.cap .pnum{background:var(--purple);}
+  h2{font-size:1.18rem;font-weight:800;color:#FFFFFF;flex:1;min-width:200px;}
+  .tag{font-size:.72rem;font-weight:700;padding:3px 14px;border-radius:99px;white-space:nowrap;}
+  .tag.core{background:rgba(255,122,92,.15);color:var(--accent);border:1px solid var(--accent);}
+  .tag.plus{background:rgba(242,193,78,.15);color:var(--gold);border:1px solid var(--gold);}
+  .tag.cap{background:rgba(201,166,245,.15);color:var(--purple);border:1px solid var(--purple);}
+
+  .phase-body{padding:22px 24px 26px;}
+
+  .why{
+    background:rgba(124,199,240,.07);
+    border-inline-start:4px solid var(--steel);
+    border-radius:0 8px 8px 0;
+    padding:12px 18px;
+    margin-bottom:22px;
+    font-size:.92rem;font-weight:600;color:var(--ink-soft);
+  }
+  .why b{color:var(--steel);font-weight:800;}
+
+  h3{
+    font-size:1rem;font-weight:800;color:var(--green);
+    margin:22px 0 12px;padding-bottom:6px;
+    border-bottom:1px dashed var(--line);
+    display:flex;align-items:center;gap:10px;
+  }
+  h3::before{content:"◆";font-size:.7rem;color:var(--green);}
+  .phase-body h3:first-of-type{margin-top:0;}
+
+  dl{margin:0;}
+  dt{
+    font-weight:800;color:var(--ink);font-size:.95rem;
+    margin-top:14px;
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  dt::before{content:"▸";color:var(--accent);font-size:.8rem;}
+  .phase.plus dt::before{color:var(--gold);}
+  .phase.cap dt::before{color:var(--purple);}
+  dd{
+    color:var(--ink-soft);font-size:.9rem;font-weight:500;
+    margin:2px 24px 0 0;padding-inline-start:20px;
+    border-inline-start:2px solid var(--line);
+  }
+
+  /* ===== خروجی عملی هر فاز ===== */
+  .deliver{
+    margin-top:24px;
+    background:rgba(122,223,160,.07);
+    border:1.5px solid var(--green);
+    border-radius:12px;
+    padding:16px 20px;
+  }
+  .deliver-title{
+    font-size:.95rem;font-weight:900;color:var(--green);
+    display:flex;align-items:center;gap:10px;margin-bottom:8px;
+  }
+  .deliver-title::before{content:"🛠";font-size:1rem;}
+  .deliver p{font-size:.9rem;font-weight:500;color:var(--ink-soft);}
+  .deliver p b{color:var(--ink);font-weight:800;}
+  .deliver .out{
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+    font-size:.85rem;font-weight:700;color:var(--green);
+  }
+
+  .summary{
+    background:var(--card);
+    border:1px solid var(--green);
+    border-radius:14px;
+    padding:26px 28px;
+    margin-top:8px;
+  }
+  .summary h2{color:var(--green);font-size:1.1rem;margin-bottom:14px;}
+  .summary p{font-size:.93rem;font-weight:500;color:var(--ink-soft);margin-bottom:12px;}
+  .summary p:last-child{margin-bottom:0;}
+  .summary b{color:var(--ink);font-weight:800;}
+
+  footer{
+    text-align:center;margin-top:34px;
+    font-family:'IBM Plex Mono',monospace;direction:ltr;
+    font-size:.7rem;font-weight:600;letter-spacing:.15em;color:#5A6C7C;
+  }
+
+  @media(max-width:600px){
+    body{font-size:15px;}
+    header,.phase-body{padding:22px 16px;}
+    .phase-head{padding:14px 16px;}
+    .meta{grid-template-columns:1fr;}
+    dd{margin:2px 12px 0 0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================================================== -->
+<header>
+  <div class="eyebrow"><span>FINAL ROADMAP · REV E · PRACTICAL EDITION</span><span>UK PRACTICE · EUROCODES</span></div>
+  <h1>Roadmap نهایی مسیر <em>Graduate Structural Engineer</em> در UK</h1>
+  <p class="subtitle">نسخه‌ی عملی: هر فاز یک <b>خروجی قابل ارائه</b> دارد که مستقیم وارد <code>Portfolio</code> تو می‌شود. چون کارفرمای UK دنبال کسی است که <b>نشان بدهد</b> می‌تواند کار را انجام دهد — نه فقط بگوید بلدم.</p>
+  <div class="meta">
+    <div><b>مرجع طراحی</b><code>Eurocodes EC0–EC7</code></div>
+    <div><b>ساختار</b>۱۸ فاز + یک <code>Capstone Project</code></div>
+    <div><b>قانون پیشروی</b>Quiz + تحویل خروجی عملی هر فاز</div>
+  </div>
+</header>
+
+<div class="legend">
+  <span><span class="dot core"></span>هسته‌ی اصلی — الزامی</span>
+  <span><span class="dot plus"></span>مزیت رقابتی</span>
+  <span><span class="dot cap"></span>پروژه‌ی نهایی Portfolio</span>
+</div>
+<!-- ================================================== فهرست مطالب -->
+<nav class="toc">
+  <div class="toc-title">فهرست مطالب</div>
+  <ol>
+    <li>
+      <a href="#p0"><span class="tnum">P0</span>Introduction & Engineering Mindset — آشنایی با دنیای مهندسی سازه</a>
+      <div class="subs">0.1 شناخت حرفه · 0.2 شناخت سازه · 0.3 رفتار سازه · 🛠 Load Path Study</div>
+    </li>
+    <li>
+      <a href="#p1"><span class="tnum">P1</span>Units & Statics — واحدها و ایستایی</a>
+      <div class="subs">1.1 واحدها · 1.2 نیرو و لنگر · 1.3 تعادل و تکیه‌گاه‌ها · 🛠 Calc Package 01</div>
+    </li>
+    <li>
+      <a href="#p2"><span class="tnum">P2</span>Material Behaviour — رفتار مصالح</a>
+      <div class="subs">2.1 تنش و کرنش · 2.2 رفتار و مشخصات کلیدی · 🛠 Material Comparison Sheet</div>
+    </li>
+    <li>
+      <a href="#p3"><span class="tnum">P3</span>Determinate Analysis — تحلیل سازه‌های معین (SFD & BMD)</a>
+      <div class="subs">3.1 شناخت تیرها و بارها · 3.2 برش و خمش · 3.3 تکمیلی · 🛠 Calc Package 02</div>
+    </li>
+    <li>
+      <a href="#p4"><span class="tnum">P4</span>Section Properties — مشخصات هندسی مقطع</a>
+      <div class="subs">4.1 مشخصات پایه · 4.2 مشخصات طراحی · 4.3 مقاطع استاندارد UK · 🛠 Calc Package 03</div>
+    </li>
+    <li>
+      <a href="#p5"><span class="tnum">P5</span>Indeterminate Structures — سازه‌های نامعین (مقدماتی)</a>
+      <div class="subs">5.1 مفاهیم پایه · 5.2 تیر سراسری · 🛠 Calc Package 04</div>
+    </li>
+    <li>
+      <a href="#p6"><span class="tnum">P6</span>Loading, Load Path & Limit State — بارگذاری (EC0 / EC1)</a>
+      <div class="subs">6.0 How to Read Eurocodes · 6.1 فلسفه‌ی طراحی · 6.2 انواع بار (EN 1991) · 6.3 ترکیب بار (EN 1990) · 6.4 کارگاه Load Path و Load Takedown · 🛠 Calc Package 05 ⭐</div>
+    </li>
+    <li>
+      <a href="#p7"><span class="tnum">P7</span>Steel Design — طراحی فولاد (EC3)</a>
+      <div class="subs">7.1 مصالح و مقاطع · 7.2 طراحی تیر فولادی · 7.3 طراحی ستون فولادی · 7.4 اتصالات (مقدماتی) · 🛠 Design Package 06 ⭐</div>
+    </li>
+    <li>
+      <a href="#p8"><span class="tnum">P8</span>Reinforced Concrete Design — طراحی بتن مسلح (EC2)</a>
+      <div class="subs">8.1 مصالح و دوام · 8.2 طراحی RC Beam · 8.3 طراحی RC Column و Slab · 8.4 جزئیات میلگرد · 🛠 Design Package 07 ⭐</div>
+    </li>
+    <li>
+      <a href="#p9"><span class="tnum">P9</span>Stability & Robustness — پایداری و یکپارچگی</a>
+      <div class="subs">9.1 سیستم‌های مقاوم جانبی · 9.2 Robustness · 🛠 Report 08</div>
+    </li>
+    <li>
+      <a href="#p10"><span class="tnum">P10</span>Foundations — پی‌ها (EC7)</a>
+      <div class="subs">10.1 خاک و بار · 10.2 انواع پی · 10.3 نشست و آیین‌نامه · 🛠 Design Package 09</div>
+    </li>
+    <li>
+      <a href="#p11"><span class="tnum">P11</span>Timber & Masonry — چوب و مصالح بنایی (آشنایی)</a>
+      <div class="subs">11.1 Timber · 11.2 Masonry · 🛠 Calc Package 10</div>
+    </li>
+    <li>
+      <a href="#p12"><span class="tnum">P12</span>Structural Drawings — نقشه‌های سازه</a>
+      <div class="subs">12.1 انواع نقشه · 12.2 اجزای نقشه · 12.3 Reading Professional Calculation Packages · 🛠 Report 11</div>
+    </li>
+    <li class="tplus">
+      <a href="#p13"><span class="tnum">P13</span>Structural Software — نرم‌افزارها (تقویت‌شده)</a>
+      <div class="subs">13.1 AutoCAD و ترسیم فنی · 13.2 Revit Structure (تقویت‌شده) · 13.3 تحلیل و طراحی · 🛠 Package 12 ⭐</div>
+    </li>
+    <li class="tplus">
+      <a href="#p14"><span class="tnum">P14</span>Python for Structural Engineers ⭐</a>
+      <div class="subs">14.1 مبانی Python · 14.2 پروژه‌های سازه‌ای · 🛠 GitHub Repository ⭐</div>
+    </li>
+    <li class="tplus">
+      <a href="#p15"><span class="tnum">P15</span>Professional Practice (UK) — حرفه و صنعت</a>
+      <div class="subs">15.1 مسیر حرفه‌ای · 15.2 صنعت ساخت UK · 15.3 Construction Awareness · 🛠 Document 13</div>
+    </li>
+    <li class="tcap">
+      <a href="#p16"><span class="tnum">P16</span>Capstone Project — پروژه‌ی جامع Portfolio 🏗</a>
+      <div class="subs">16.1 تعریف پروژه · 16.2 اجرای کامل (۸ قدم) · 16.3 مستندسازی نهایی · 🛠 Capstone Design Report ⭐⭐⭐</div>
+    </li>
+    <li>
+      <a href="#p17"><span class="tnum">P17</span>Career Preparation & Interview — آماده‌سازی نهایی</a>
+      <div class="subs">17.1 اسناد اپلای · 17.2 استراتژی اپلای · 17.3 مصاحبه · 🛠 Complete Application Pack 🎯</div>
+    </li>
+  </ol>
+</nav>
+
+
+<!-- ================================================== P0 -->
+<section id="p0" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 0</span><h2>Introduction &amp; Engineering Mindset — آشنایی با دنیای مهندسی سازه</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>چرا این فاز اول است؟</b> قبل از هر فرمولی باید «تصویر بزرگ» را ببینی. سؤال <code>Explain a load path</code> یکی از رایج‌ترین سؤال‌های <code>Interview</code> است.</p>
+
+    <h3>0.1 — شناخت حرفه</h3>
+    <dl>
+      <dt><code>Structural Engineering</code> چیست؟</dt>
+      <dd>رشته‌ای که مطمئن می‌شود سازه‌ها زیر بار «نمی‌شکنند»، «واژگون نمی‌شوند» و «بیش از حد خم نمی‌شوند».</dd>
+      <dt>یک <code>Graduate Structural Engineer</code> در UK چه کار می‌کند؟</dt>
+      <dd>کارهای واقعی روز اول: محاسبات ساده، چک کردن نقشه، کمک به مهندس ارشد — نه طراحی برج!</dd>
+      <dt><code>Structural Design Workflow</code></dt>
+      <dd>مسیر پروژه: <code>Concept Design</code> ← <code>Scheme Design</code> ← <code>Detailed Design</code> ← <code>Construction</code>.</dd>
+    </dl>
+
+    <h3>0.2 — شناخت سازه</h3>
+    <dl>
+      <dt>انواع سازه‌ها و <code>Structural Members</code></dt>
+      <dd>سازه‌های <code>Steel</code>، <code>Concrete</code>، <code>Masonry</code>، <code>Timber</code> + نقش <code>Beam</code>، <code>Column</code>، <code>Slab</code>، <code>Wall</code>، <code>Foundation</code>.</dd>
+      <dt><code>Load Path</code></dt>
+      <dd>مهم‌ترین مفهوم فاز: بار از <code>Slab</code> به <code>Beam</code>، از <code>Beam</code> به <code>Column</code>، از <code>Column</code> به <code>Foundation</code> و در نهایت به زمین.</dd>
+      <dt><code>Structural Behaviour</code>، <code>Stability</code> و <code>Failure Mechanisms</code></dt>
+      <dd>درک شهودی از خم شدن تیر، فشرده شدن ستون + آشنایی با <code>Bending Failure</code>، <code>Shear Failure</code>، <code>Buckling</code>، <code>Overturning</code>.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Load Path Study:</b> یک ساختمان ساده‌ی دو طبقه را با هم تعریف می‌کنیم (همین ساختمان تا آخر مسیر «پروژه‌ی تمرینی» ما می‌ماند). تو مسیر بار را از بام تا زمین روی یک دیاگرام مشخص می‌کنی و برای هر مرحله یک جمله‌ی توضیح انگلیسی می‌نویسی — دقیقاً همان چیزی که در Interview باید شفاهی بگویی.</p>
+      <p class="out">خروجی: یک برگه‌ی <code>Load Path Diagram</code> با حاشیه‌نویسی — اولین سند Portfolio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P1 -->
+<section id="p1" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 1</span><h2>Units &amp; Statics — واحدها و ایستایی</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>زبان مشترک تمام محاسبات.</b> از همین فاز، نوشتن محاسبات به سبک <code>UK Calculation Sheet</code> را شروع می‌کنیم — مهارتی که کارفرما روز اول از تو می‌خواهد.</p>
+
+    <h3>1.1 — واحدها</h3>
+    <dl>
+      <dt><code>SI Units</code> و تبدیل واحدها</dt>
+      <dd>نیرو با <code>kN</code>، تنش با <code>MPa</code> (<code>N/mm²</code>)، لنگر با <code>kN·m</code> — و تبدیل‌هایی که بیشترین اشتباهات از آن‌ها می‌آید.</dd>
+    </dl>
+
+    <h3>1.2 — نیرو و لنگر</h3>
+    <dl>
+      <dt><code>Scalars &amp; Vectors</code>، <code>Force</code>، <code>Moment</code>، <code>Couple</code></dt>
+      <dd>بردار «اندازه + جهت» دارد؛ <code>Moment = F × d</code> اثر چرخشی نیرو است — مفهومی که تا آخر مسیر با آن زندگی می‌کنی.</dd>
+    </dl>
+
+    <h3>1.3 — تعادل و تکیه‌گاه‌ها</h3>
+    <dl>
+      <dt><code>Free Body Diagram (FBD)</code></dt>
+      <dd>مهم‌ترین ابزار ذهنی مهندس: جسم را جدا می‌کشیم با «تمام» نیروهای وارد بر آن.</dd>
+      <dt>معادلات <code>Equilibrium</code></dt>
+      <dd>سه قانون طلایی: <code>ΣFx = 0</code>، <code>ΣFy = 0</code>، <code>ΣM = 0</code>.</dd>
+      <dt><code>Roller</code>، <code>Pinned</code>، <code>Fixed Support</code> و <code>DOF</code></dt>
+      <dd>هر تکیه‌گاه چه حرکت‌هایی را «قفل» می‌کند و چه عکس‌العمل‌هایی دارد.</dd>
+      <dt>محاسبه‌ی <code>Support Reactions</code></dt>
+      <dd>اولین محاسبه‌ی واقعی تو با تمرین‌های متعدد.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>اولین Calculation Package:</b> عکس‌العمل تکیه‌گاهی ۳ تیر مختلف را محاسبه می‌کنی، اما نه روی کاغذ شلخته — روی قالب استاندارد <code>Calc Sheet</code> دفاتر UK با سربرگ <code>Project / Sheet No / Rev / Checked by</code>. من قالب را به تو می‌دهم و یاد می‌گیری محاسبه را «قابل چک شدن» بنویسی.</p>
+      <p class="out">خروجی: <code>Calc Package 01 — Support Reactions</code> (۳ برگ محاسبه‌ی مرتب).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P2 -->
+<section id="p2" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 2</span><h2>Material Behaviour — رفتار مصالح</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>تمام ضوابط <code>Eurocode</code> بر پایه‌ی رفتار مصالح نوشته شده‌اند.</b> تا ندانی فولاد و بتن چطور «جواب می‌دهند»، فرمول‌های طراحی بی‌معنا هستند.</p>
+
+    <h3>2.1 — تنش و کرنش</h3>
+    <dl>
+      <dt><code>Stress (σ = F/A)</code> و <code>Strain (ε = ΔL/L)</code></dt>
+      <dd>مصالح چقدر «تحت فشارند» و چقدر «کش آمده‌اند» — پایه‌ی همه‌چیز.</dd>
+    </dl>
+
+    <h3>2.2 — رفتار و مشخصات کلیدی</h3>
+    <dl>
+      <dt><code>Elastic</code> در برابر <code>Plastic Behaviour</code> و نمودار <code>Stress–Strain</code></dt>
+      <dd>فنر برمی‌گردد، خمیر نمی‌گردد — و مهم‌ترین نمودار مهندسی مصالح، نقطه‌به‌نقطه.</dd>
+      <dt><code>Young's Modulus (E)</code>، <code>Yield Strength (fy)</code>، <code>Ultimate Strength (fu)</code></dt>
+      <dd>سفتی ماده (<code>E = 210 GPa</code> برای فولاد)، نقطه‌ی تسلیم و حداکثر مقاومت.</dd>
+      <dt><code>Ductility</code> و مقایسه‌ی <code>Brittle / Ductile</code></dt>
+      <dd>چرا فولاد قبل از خرابی «هشدار می‌دهد» و چرا داخل بتن <code>Reinforcement</code> می‌گذاریم.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Material Datasheet:</b> یک برگه‌ی مقایسه‌ای می‌سازی: نمودار <code>Stress–Strain</code> برای <code>S355 Steel</code> و <code>C32/40 Concrete</code> کنار هم + جدول خلاصه‌ی <code>E</code>، <code>fy</code>، <code>fu</code>، <code>Ductility</code> و کاربرد هر کدام. این برگه بعداً مرجع سریع خودت در فازهای طراحی می‌شود.</p>
+      <p class="out">خروجی: <code>Material Comparison Sheet — Steel vs Concrete</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P3 -->
+<section id="p3" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 3</span><h2>Determinate Analysis — تحلیل سازه‌های معین (SFD &amp; BMD)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>مهم‌ترین فاز برای Interview!</b> پرتکرارترین سؤال فنی: <code>Draw the SFD and BMD for this beam</code>. باید بدون مکث از پس آن بربیایی.</p>
+
+    <h3>3.1 — شناخت تیرها و بارها</h3>
+    <dl>
+      <dt><code>Simply Supported</code>، <code>Cantilever</code>، <code>Overhanging</code>، <code>Fixed</code>، <code>Continuous Beam</code></dt>
+      <dd>از تیر دوسر ساده (ستاره‌ی مصاحبه‌ها) تا تیر سراسری (که تحلیلش در Phase 5 کامل می‌شود).</dd>
+      <dt><code>Point Load</code>، <code>UDL</code>، <code>UVL</code>، <code>Moment Load</code></dt>
+      <dd>بار متمرکز (<code>kN</code>)، بار گسترده‌ی یکنواخت (<code>kN/m</code>)، بار خطی متغیر و لنگر متمرکز.</dd>
+    </dl>
+
+    <h3>3.2 — برش و خمش</h3>
+    <dl>
+      <dt><code>Shear Force</code> و <code>SFD</code></dt>
+      <dd>نیروی «قیچی‌کننده‌ی» داخلی و نمودار تغییراتش در طول تیر.</dd>
+      <dt><code>Bending Moment</code> و <code>BMD</code></dt>
+      <dd>لنگر «خم‌کننده» — محل <code>Maximum Moment</code> نقطه‌ی حساس طراحی است.</dd>
+      <dt>رابطه‌ی <code>Load–Shear–Moment</code> و فرمول‌های طلایی</dt>
+      <dd><code>M = wL²/8</code> و <code>M = PL/4</code> و رابطه‌ای که رسم نمودارها را ۱۰ برابر سریع می‌کند.</dd>
+    </dl>
+
+    <h3>3.3 — تکمیلی</h3>
+    <dl>
+      <dt>مقدمه‌ی <code>Truss Analysis</code> و مفهوم <code>Deflection</code></dt>
+      <dd><code>Method of Joints</code> در حد یک مثال + خیز تیر با فرمول‌های آماده مثل <code>5wL⁴/384EI</code>.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>SFD/BMD Portfolio Sheets:</b> برای ۴ حالت کلاسیک (تیر ساده با <code>UDL</code>، تیر ساده با <code>Point Load</code>، <code>Cantilever</code>، <code>Overhanging</code>) محاسبات کامل + نمودارهای تمیز و اندازه‌گذاری‌شده تهیه می‌کنی — روی همان قالب <code>Calc Sheet</code>. این دقیقاً برگه‌ای است که در مصاحبه‌ی فنی جلویت می‌گذارند.</p>
+      <p class="out">خروجی: <code>Calc Package 02 — SFD &amp; BMD (4 Cases)</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P4 -->
+<section id="p4" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 4</span><h2>Section Properties — مشخصات هندسی مقطع</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>حلقه‌ی گمشده!</b> بدون <code>I</code> و <code>W</code> نه <code>Bending Stress</code> قابل محاسبه است نه <code>Deflection</code>. پاسخ سؤال «چرا تیر <code>I-shaped</code> است؟» هم همین‌جاست.</p>
+
+    <h3>4.1 — مشخصات پایه</h3>
+    <dl>
+      <dt><code>Centroid</code> و <code>Area (A)</code></dt>
+      <dd>مرکز سطح (که محور خمش از آن می‌گذرد) و مساحت مقطع.</dd>
+      <dt><code>Second Moment of Area (I)</code> و <code>Parallel Axis Theorem</code></dt>
+      <dd>معیار مقاومت در برابر خم شدن — هرچه ماده از محور دورتر، <code>I</code> بزرگ‌تر (راز <code>I-Section</code>!) + محاسبه برای مقاطع مرکب.</dd>
+    </dl>
+
+    <h3>4.2 — مشخصات طراحی</h3>
+    <dl>
+      <dt><code>Wel</code>، <code>Wpl</code> و <code>Radius of Gyration (i)</code></dt>
+      <dd>پل بین لنگر و تنش (<code>σ = M/W</code>) و عدد کلیدی محاسبات <code>Buckling</code> در Phase 7.</dd>
+    </dl>
+
+    <h3>4.3 — مقاطع استاندارد UK</h3>
+    <dl>
+      <dt><code>UB</code>، <code>UC</code>، <code>PFC</code>، <code>SHS/RHS/CHS</code> و <code>Blue Book</code></dt>
+      <dd>معنی <code>UB 457×191×67</code> و مهارت روزمره‌ی پیدا کردن مشخصات از <code>Section Tables</code>.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Section Properties Package:</b> برای یک <code>T-Section</code> مرکب، <code>Centroid</code> و <code>I</code> را کامل با <code>Parallel Axis Theorem</code> حساب می‌کنی + برای تیر پروژه‌ی تمرینی‌مان از <code>Blue Book</code> یک <code>UB</code> اولیه انتخاب می‌کنی و انتخابت را توجیه می‌نویسی.</p>
+      <p class="out">خروجی: <code>Calc Package 03 — Section Properties + Preliminary UB Selection</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P5 -->
+<section id="p5" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 5</span><h2>Indeterminate Structures — سازه‌های نامعین (مقدماتی)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>ساختمان‌های واقعی تقریباً همیشه <code>Indeterminate</code> هستند.</b> درک مفهومی + یک روش دستی کافی است — نرم‌افزار بقیه را انجام می‌دهد، اما تو باید بفهمی نرم‌افزار چه می‌کند.</p>
+
+    <h3>5.1 — مفاهیم پایه</h3>
+    <dl>
+      <dt><code>Static Determinacy</code> و <code>Degree of Indeterminacy</code></dt>
+      <dd>سازه‌ی معین با ۳ معادله حل می‌شود؛ نامعین «مجهول اضافه» دارد — با فرمول شمارش.</dd>
+      <dt>مفهوم <code>Stiffness</code></dt>
+      <dd>قانون طلایی: <b>بار به سمت عضو سخت‌تر می‌رود</b> — جمله‌ای که در Interview می‌درخشد.</dd>
+    </dl>
+
+    <h3>5.2 — تیر سراسری</h3>
+    <dl>
+      <dt>رفتار <code>Continuous Beam</code>: <code>Hogging</code> و <code>Sagging</code></dt>
+      <dd>چرا روی تکیه‌گاه میانی لنگر منفی و وسط دهانه لنگر مثبت داریم.</dd>
+      <dt><code>Moment Distribution Method</code> و ضرایب پرکاربرد</dt>
+      <dd>یک مثال دستی + اعداد جادویی محل کار: <code>wL²/8</code>، <code>wL²/12</code>، <code>wL²/10</code> و منطق پشتشان.</dd>
+      <dt><code>Moment Redistribution</code></dt>
+      <dd>سازه‌ی <code>Ductile</code> می‌تواند لنگر را «بازتوزیع» کند — در حد آشنایی برای <code>EC2</code>.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Continuous Beam Analysis:</b> یک تیر دو دهانه از پروژه‌ی تمرینی را با <code>Moment Distribution Method</code> تحلیل می‌کنی، <code>BMD</code> کامل با <code>Hogging/Sagging</code> رسم می‌کنی و نتیجه را با ضریب تقریبی <code>wL²/10</code> مقایسه و تفسیر می‌کنی.</p>
+      <p class="out">خروجی: <code>Calc Package 04 — Continuous Beam Analysis</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P6 -->
+<section id="p6" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 6</span><h2>Loading, Load Path &amp; Limit State — بارگذاری (EC0 / EC1)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>قلب عملی این Roadmap.</b> بنا به درخواست خودت، این فاز حالا یک «کارگاه تحلیل <code>Load Path</code> و بارگذاری» کامل است — چون <code>Load Takedown</code> اولین کار محاسباتی واقعی هر Graduate در دفتر است.</p>
+
+    <h3>6.0 — How to Read Eurocodes 📖</h3>
+    <dl>
+      <dt>ساختار <code>Eurocode</code></dt>
+      <dd>هر کد چطور سازماندهی شده: <code>Parts</code> (مثلاً <code>EN 1991-1-1</code> یعنی چه)، <code>Sections</code> و شماره‌گذاری — تا در دریای صفحات گم نشوی.</dd>
+      <dt><code>Clause</code>، <code>Table</code>، <code>Annex</code></dt>
+      <dd>تفاوت بند اصلی با جدول و پیوست + معنی نشانه‌هایی مثل <code>(1)P</code> (الزام) در برابر <code>(1)</code> (توصیه).</dd>
+      <dt><code>National Annex (NA)</code></dt>
+      <dd>نکته‌ی حیاتی UK: هر کشور مقادیر خودش را دارد — <code>UK NA</code> همیشه بر مقادیر پیشنهادی خود کد اولویت دارد. ندانستن این، اشتباه کلاسیک تازه‌کارهاست.</dd>
+      <dt>پیدا کردن سریع فرمول</dt>
+      <dd>تکنیک عملی «مسیریابی» در کد: از فهرست به <code>Section</code> درست، از آنجا به <code>Clause</code> و جدول — با چند تمرین واقعی روی <code>EN 1990</code>.</dd>
+    </dl>
+
+    <h3>6.1 — فلسفه‌ی طراحی</h3>
+    <dl>
+      <dt><code>Limit State Design</code>: <code>ULS</code> و <code>SLS</code></dt>
+      <dd>حالت حدی نهایی (فروریختن — ایمنی جانی) در برابر حالت حدی بهره‌برداری (خیز، ترک، لرزش).</dd>
+    </dl>
+
+    <h3>6.2 — انواع بار (EN 1991)</h3>
+    <dl>
+      <dt><code>Permanent Action (Gk)</code></dt>
+      <dd>بارهای همیشگی: وزن سازه، کف‌سازی، تأسیسات — با جداول مقادیر واقعی.</dd>
+      <dt><code>Imposed / Live Load (Qk)</code></dt>
+      <dd>بار استفاده: مقادیر استاندارد UK مثل <code>1.5 kN/m²</code> مسکونی، <code>2.5–3.0 kN/m²</code> اداری.</dd>
+      <dt><code>Wind Load</code> و <code>Snow Load</code></dt>
+      <dd>روند کلی <code>EN 1991-1-4</code> و <code>EN 1991-1-3</code> در حد مفهوم و جریان محاسبه.</dd>
+    </dl>
+
+    <h3>6.3 — ترکیب بار (EN 1990)</h3>
+    <dl>
+      <dt><code>Partial Factors</code> و <code>Load Combinations</code></dt>
+      <dd>چرا <code>1.35Gk + 1.5Qk</code> برای <code>ULS</code> و <code>1.0Gk + 1.0Qk</code> برای <code>SLS</code>.</dd>
+      <dt><code>Tributary Area</code></dt>
+      <dd>هر تیر و ستون چه سهمی از بار کف را «جمع می‌کند» — کلید تمرین بزرگ این فاز.</dd>
+    </dl>
+
+    <h3>6.4 — کارگاه Load Path و Load Takedown</h3>
+    <dl>
+      <dt>تمرین مرحله‌به‌مرحله</dt>
+      <dd>از <code>Floor Build-up</code> شروع می‌کنیم: محاسبه‌ی <code>kN/m²</code> کف ← بار خطی تیرها (<code>kN/m</code>) ← بار محوری ستون‌ها طبقه‌به‌طبقه ← بار پای ستون برای طراحی <code>Foundation</code>.</dd>
+      <dt>دنبال کردن یک <code>kN</code></dt>
+      <dd>تمرین ذهنی محبوب مصاحبه: یک نیروی مشخص را از نقطه‌ی اثر تا زمین «تعقیب» می‌کنیم.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Load Takedown Package:</b> برای ساختمان دو طبقه‌ی پروژه‌ی تمرینی، بارگذاری کامل را انجام می‌دهی: جدول <code>Floor Loading</code>، بار طراحی تیر بحرانی با ترکیب <code>ULS/SLS</code>، و جدول <code>Column Load Takedown</code> از بام تا پی. این سند، «ورودی» تمام فازهای طراحی بعدی است.</p>
+      <p class="out">خروجی: <code>Calc Package 05 — Loading &amp; Column Load Takedown</code> ⭐ (یکی از مهم‌ترین اسناد Portfolio).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P7 -->
+<section id="p7" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 7</span><h2>Steel Design — طراحی فولاد (EC3)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>غایب بزرگ Roadmap دوم!</b> اکثر <code>Consultancy</code>‌های UK حتماً از فولاد سؤال می‌پرسند. اینجا اولین «پروژه‌ی طراحی واقعی» تو اتفاق می‌افتد.</p>
+
+    <h3>7.1 — مصالح و مقاطع</h3>
+    <dl>
+      <dt><code>S275, S355</code> و <code>Section Classification (Class 1–4)</code></dt>
+      <dd>گریدهای رایج (عدد = <code>fy</code> به <code>MPa</code>) و دسته‌بندی مقاطع بر اساس <code>Local Buckling</code> — قدم اول هر طراحی <code>EC3</code>.</dd>
+    </dl>
+
+    <h3>7.2 — طراحی تیر فولادی</h3>
+    <dl>
+      <dt><code>Bending Resistance: MEd ≤ Mc,Rd</code></dt>
+      <dd>کنترل خمش با <code>Mc,Rd = Wpl × fy / γM0</code> — با مثال عددی کامل.</dd>
+      <dt><code>Shear Resistance (Vpl,Rd)</code> و <code>Deflection Check</code></dt>
+      <dd>کنترل برش با <code>Shear Area</code> + کنترل خیز <code>SLS</code> با حدودی مثل <code>Span/360</code>.</dd>
+      <dt><code>Lateral Torsional Buckling (LTB)</code></dt>
+      <dd>پدیده‌ی محبوب مصاحبه‌ها: بال فشاری می‌خواهد «به پهلو کمانه کند» — مفهوم، عوامل مؤثر و نقش <code>Restraint</code>.</dd>
+    </dl>
+
+    <h3>7.3 — طراحی ستون فولادی</h3>
+    <dl>
+      <dt><code>Flexural Buckling</code>، <code>Effective Length</code>، <code>Slenderness</code>، <code>Buckling Curves</code></dt>
+      <dd>چرا ستون لاغر قبل از ظرفیت مصالح کمانه می‌کند، ضرایب طول مؤثر، و گرفتن ضریب کاهش <code>χ</code>.</dd>
+    </dl>
+
+    <h3>7.4 — اتصالات (مقدماتی)</h3>
+    <dl>
+      <dt><code>Bolted / Welded</code> و <code>Simple / Moment Connection</code></dt>
+      <dd>پیچ <code>Grade 8.8</code>، <code>Fillet Weld</code> و تفاوت اتصال مفصلی و گیردار — در حد شناخت.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">پروژه‌ی طراحی ۱ — خروجی قابل ارائه</div>
+      <p><b>Steel Design Project (EC3):</b> با بارهای <code>Load Takedown</code> فاز قبل، تیر و ستون بحرانی پروژه‌ی تمرینی را کامل طراحی می‌کنی: انتخاب مقطع، <code>Classification</code>، کنترل <code>Bending</code>، <code>Shear</code>، <code>LTB</code>، <code>Deflection</code> و <code>Buckling</code> ستون + اسکچ اندازه‌گذاری‌شده‌ی مقاطع و یک <code>Design Summary</code> یک‌صفحه‌ای.</p>
+      <p class="out">خروجی: <code>Design Package 06 — Steel Beam &amp; Column to EC3</code> ⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P8 -->
+<section id="p8" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 8</span><h2>Reinforced Concrete Design — طراحی بتن مسلح (EC2)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>نیمه‌ی دیگر بازار کار.</b> تیر، ستون و دال بتنی در یک فاز منسجم + دومین پروژه‌ی طراحی کامل تو.</p>
+
+    <h3>8.1 — مصالح و دوام</h3>
+    <dl>
+      <dt><code>C25/30, C32/40</code>، <code>B500B</code>، <code>Cover &amp; Durability</code></dt>
+      <dd>معنی گریدهای بتن، میلگرد استاندارد UK (<code>H10...H25</code>) و انتخاب پوشش بر اساس <code>Exposure Classes</code>.</dd>
+    </dl>
+
+    <h3>8.2 — طراحی RC Beam</h3>
+    <dl>
+      <dt>خمش: <code>K</code>، <code>Lever Arm (z)</code>، <code>As</code></dt>
+      <dd>روند سه‌قدمی محاسبه‌ی میلگرد — پرتکرارترین محاسبه‌ی دستی یک Graduate.</dd>
+      <dt>برش: <code>Shear Links</code> + <code>Detailing</code> پایه</dt>
+      <dd>خاموت‌ها با مدل <code>Truss Analogy</code> + حداقل/حداکثر میلگرد و فاصله‌ها.</dd>
+    </dl>
+
+    <h3>8.3 — طراحی RC Column و Slab</h3>
+    <dl>
+      <dt><code>Interaction Diagram</code> و <code>Slenderness</code> ستون</dt>
+      <dd>ترکیب <code>Axial + Moment</code> و تشخیص ستون کوتاه از لاغر.</dd>
+      <dt><code>One-way / Two-way Slab</code>، <code>Punching Shear</code>، <code>Span/Depth Ratio</code></dt>
+      <dd>جهت حرکت بار در دال، خطر «سوراخ شدن» <code>Flat Slab</code> دور ستون و روش سریع کنترل خیز.</dd>
+    </dl>
+
+    <h3>8.4 — جزئیات میلگرد</h3>
+    <dl>
+      <dt><code>Anchorage</code> و <code>Lap Length</code></dt>
+      <dd>مهار و وصله‌ی میلگرد با قواعد سرانگشتی رایج دفاتر.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">پروژه‌ی طراحی ۲ — خروجی قابل ارائه</div>
+      <p><b>RC Design Project (EC2):</b> یک <code>RC Beam</code> از پروژه‌ی تمرینی را کامل طراحی می‌کنی: خمش، برش، کنترل خیز + <b>نقشه‌ی میلگردگذاری دستی</b> (نما و مقطع با کدگذاری میلگردها مثل <code>3H20</code>) و یک <code>Bar Schedule</code> ساده. ترکیب «محاسبه + نقشه» دقیقاً چیزی است که کارفرما می‌خواهد ببیند.</p>
+      <p class="out">خروجی: <code>Design Package 07 — RC Beam to EC2 + Reinforcement Sketch</code> ⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P9 -->
+<section id="p9" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 9</span><h2>Stability &amp; Robustness — پایداری و یکپارچگی</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>سؤال محبوب Interview:</b> <code>How does your building resist lateral loads?</code> — تا اینجا اعضای «تکی» را طراحی کردی؛ حالا کل ساختمان.</p>
+
+    <h3>9.1 — سیستم‌های مقاوم جانبی</h3>
+    <dl>
+      <dt><code>Bracing</code>، <code>Shear Walls</code>، <code>Cores</code>، <code>Moment Frames</code></dt>
+      <dd>مهاربندی (<code>X/V/K</code>)، دیوار برشی، هسته‌ی آسانسور و قاب خمشی — مزایا و معایب هر کدام.</dd>
+      <dt><code>Floor Diaphragm</code> و <code>Sway / Non-sway</code></dt>
+      <dd>نقش کف به‌عنوان «صفحه‌ی سخت» + تشخیصی که طول مؤثر ستون‌ها را عوض می‌کند.</dd>
+    </dl>
+
+    <h3>9.2 — Robustness</h3>
+    <dl>
+      <dt><code>Disproportionate Collapse</code> و درس <code>Ronan Point (1968)</code></dt>
+      <dd>سازه نباید با یک خرابی موضعی «مثل دومینو» فرو بریزد — حادثه‌ای که مقررات UK را متحول کرد.</dd>
+      <dt><code>Tying Requirements</code> و <code>Consequence Classes (CC1–CC3)</code></dt>
+      <dd>الزامات <code>Horizontal/Vertical Ties</code> در <code>Approved Document A</code> و دسته‌بندی ساختمان‌ها.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Stability Statement:</b> برای پروژه‌ی تمرینی، یک گزارش فنی یک‌صفحه‌ای به انگلیسی می‌نویسی: سیستم مقاوم جانبی انتخابی، مسیر بار جانبی (<code>Wind → Facade → Diaphragm → Bracing → Foundation</code>) و <code>Consequence Class</code> ساختمان با دلیل. نوشتن گزارش فنی کوتاه، مهارتی است که در UK هر روز لازم داری.</p>
+      <p class="out">خروجی: <code>Report 08 — Stability &amp; Robustness Statement</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P10 -->
+<section id="p10" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 10</span><h2>Foundations — پی‌ها (EC7)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>پایان Load Path.</b> باری که از Phase 0 دنبالش کردیم، به زمین می‌رسد. طراحی <code>Pad Foundation</code> + شناخت بقیه برای Graduate کافی است.</p>
+
+    <h3>10.1 — خاک و بار</h3>
+    <dl>
+      <dt><code>Bearing Pressure ≤ Bearing Capacity</code></dt>
+      <dd>شرط اصلی طراحی پی + انواع خاک (<code>Clay</code>، <code>Sand</code>، <code>Rock</code>) و <code>Site Investigation</code> در حد آشنایی.</dd>
+    </dl>
+
+    <h3>10.2 — انواع پی</h3>
+    <dl>
+      <dt><code>Pad</code>، <code>Strip</code>، <code>Raft</code>، <code>Pile Foundation</code></dt>
+      <dd>پی منفرد (که کامل طراحی می‌کنیم)، نواری (رایج‌ترین در مسکونی UK)، گسترده و شمع (<code>End Bearing / Skin Friction</code>).</dd>
+    </dl>
+
+    <h3>10.3 — نشست و آیین‌نامه</h3>
+    <dl>
+      <dt><code>Differential Settlement</code> و آشنایی با <code>EN 1997 (EC7)</code></dt>
+      <dd>نشست غیریکنواخت است که ترک می‌آورد + ساختار کلی آیین‌نامه‌ی ژئوتکنیک.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">پروژه‌ی طراحی ۳ — خروجی قابل ارائه</div>
+      <p><b>Pad Foundation Design:</b> با بار پای ستونِ <code>Load Takedown</code> فاز 6، پی منفرد ستون بحرانی را طراحی می‌کنی: تعیین ابعاد از <code>Allowable Bearing Pressure</code>، کنترل <code>Bending</code> و <code>Punching Shear</code>، میلگردگذاری + اسکچ پلان و مقطع.</p>
+      <p class="out">خروجی: <code>Design Package 09 — Pad Foundation</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P11 -->
+<section id="p11" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 11</span><h2>Timber &amp; Masonry — چوب و مصالح بنایی (آشنایی)</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>واقعیت بازار UK:</b> در شرکت‌های کوچک و متوسط، بخش بزرگی از کار <code>Residential Extensions</code> و <code>Loft Conversions</code> است — یعنی <code>Timber</code> و <code>Masonry</code>.</p>
+
+    <h3>11.1 — Timber</h3>
+    <dl>
+      <dt><code>C16 / C24</code>، <code>Floor Joists</code>، <code>Span Tables</code> و مفهوم <code>EC5</code></dt>
+      <dd>گریدهای چوب سازه‌ای، تیرچه‌های کف و روش انتخاب سریع از جداول — همان کار روزمره‌ی دفاتر کوچک + آشنایی با <code>kmod</code>.</dd>
+    </dl>
+
+    <h3>11.2 — Masonry</h3>
+    <dl>
+      <dt><code>Cavity Wall</code>، <code>Wall Ties</code>، <code>Lintels</code> و مفهوم <code>EC6</code></dt>
+      <dd>دیوار دوجداره‌ی کلاسیک UK، و انتخاب نعل‌درگاه از کاتالوگ سازنده‌ها.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Residential Mini-Project:</b> سناریوی واقعی یک <code>Extension</code> مسکونی: تیرچه‌ی چوبی کف را از <code>Span Table</code> انتخاب می‌کنی و <code>Lintel</code> بالای بازشو را از کاتالوگ — با یک برگ محاسبه‌ی کوتاه و توجیه انتخاب. شبیه‌سازی دقیق کاری که در هفته‌ی اول یک دفتر کوچک به تو می‌دهند.</p>
+      <p class="out">خروجی: <code>Calc Package 10 — Timber Joist &amp; Lintel Selection</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P12 -->
+<section id="p12" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 12</span><h2>Structural Drawings — نقشه‌های سازه</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>واقعیت روز اول کار:</b> اولین وظیفه‌ی Graduate معمولاً «خواندن و چک کردن نقشه» است. نقشه، زبان ارتباط مهندس با کارگاه است.</p>
+
+    <h3>12.1 — انواع نقشه</h3>
+    <dl>
+      <dt><code>General Arrangement (GA)</code></dt>
+      <dd>نقشه‌ی جانمایی: گریدها، ستون‌ها، تیرها، ترازها — اولین نقشه‌ی هر پروژه.</dd>
+      <dt><code>RC Drawings</code> و <code>Bar Bending Schedule (BS 8666)</code></dt>
+      <dd>رمزگشایی کدهایی مثل <code>10H16-03-200-B1</code> و خواندن جدول خم میلگرد با <code>Shape Codes</code>.</dd>
+      <dt><code>Steel Fabrication Drawings</code></dt>
+      <dd>نقشه‌های ساخت فولاد و علائم <code>Welding/Bolting</code> در حد خواندن.</dd>
+    </dl>
+
+    <h3>12.2 — اجزای نقشه</h3>
+    <dl>
+      <dt><code>Sections</code>، <code>Details</code>، <code>Notes</code>، <code>Title Block</code></dt>
+      <dd>دنبال کردن علامت برش، فهمیدن جزئیات اتصال، یادداشت‌های عمومی و شناسنامه‌ی نقشه (<code>Revision</code>، <code>Status</code>).</dd>
+    </dl>
+
+    <h3>12.3 — Reading Professional Calculation Packages 📖</h3>
+    <dl>
+      <dt>خواندن <code>Calculation Sheet</code>‌های واقعی شرکت‌ها</dt>
+      <dd>تا اینجا نوشتن Calc Sheet را تمرین کرده‌ای؛ حالا «خواندن» نسخه‌های واقعی دفاتر: ساختار، ارجاع به <code>Clause</code>‌های Eurocode، خروجی نرم‌افزارهایی مثل <code>Tekla Tedds</code> و نحوه‌ی دنبال کردن منطق محاسبه.</dd>
+      <dt>تحلیل کردن، نه فقط خواندن</dt>
+      <dd>مهارت واقعی محل کار: تشخیص اینکه «این عدد از کجا آمد؟»، «کدام فرض پشت این مقدار است؟» — چون یکی از اولین وظایف Graduate، چک کردن محاسبات دیگران زیر نظر مهندس ارشد است.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Drawing &amp; Calc Review Exercise:</b> یک ست نقشه‌ی نمونه + یک <code>Calculation Package</code> واقعی‌مانند را با هم مرور می‌کنیم و تو یک <code>Review Summary</code> می‌نویسی: سیستم سازه چیست، بار چطور منتقل می‌شود، منطق محاسبات چه بود، و ۳ سؤال/ابهام فنی که از طراح می‌پرسیدی. «چک کردن کار دیگران و سؤال درست پرسیدن» دقیقاً خط اول شرح شغل Graduate است.</p>
+      <p class="out">خروجی: <code>Report 11 — Drawing &amp; Calculation Review Summary</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P13 -->
+<section id="p13" class="phase plus">
+  <div class="phase-head"><span class="pnum">PHASE 13</span><h2>Structural Software — نرم‌افزارها (تقویت‌شده)</h2><span class="tag plus">مزیت</span></div>
+  <div class="phase-body">
+    <p class="why"><b>بنا به درخواستت تقویت شد:</b> حالا هر نرم‌افزار یک «مینی‌پروژه» با خروجی واقعی دارد — و همه روی همان ساختمان پروژه‌ی تمرینی کار می‌کنند تا خروجی‌ها یکپارچه باشند.</p>
+
+    <h3>13.1 — AutoCAD و ترسیم فنی</h3>
+    <dl>
+      <dt>اصول <code>Technical Drawing</code></dt>
+      <dd>قبل از نرم‌افزار: <code>Scale</code>، <code>Line Types</code>، <code>Dimensioning</code>، <code>Hatching</code> و کنوانسیون‌های ترسیم سازه در UK.</dd>
+      <dt><code>AutoCAD</code></dt>
+      <dd>محیط، دستورات پایه، <code>Layers</code>، <code>Annotation</code>، <code>Layouts &amp; Viewports</code> و چاپ با مقیاس درست.</dd>
+      <dt>مینی‌پروژه</dt>
+      <dd>ترسیم <code>GA Plan</code> طبقه‌ی اول پروژه‌ی تمرینی: گریدها، ستون‌ها، تیرها با <code>Member Marks</code>، اندازه‌گذاری و <code>Title Block</code>.</dd>
+    </dl>
+
+    <h3>13.2 — Revit Structure (تقویت‌شده)</h3>
+    <dl>
+      <dt>اصول <code>BIM</code> و مدل‌سازی</dt>
+      <dd>تفاوت «مدل» با «نقشه»، مفهوم <code>Family</code>، <code>Level</code>، <code>Grid</code> و اینکه چرا آگهی‌های شغلی UK پر از کلمه‌ی <code>Revit</code> است.</dd>
+      <dt>مدل‌سازی گام‌به‌گام</dt>
+      <dd>ساخت <code>Grids &amp; Levels</code> ← قرار دادن <code>Columns</code> و <code>Beams</code> ← مدل <code>Slab</code> و <code>Foundation</code> ← ایجاد <code>Sections</code> و <code>Sheets</code>.</dd>
+      <dt>مینی‌پروژه</dt>
+      <dd>مدل کامل ساختمان دو طبقه‌ی پروژه‌ی تمرینی + تولید یک <code>GA Sheet</code> از خود مدل — همراه با <code>3D View</code> برای Portfolio.</dd>
+    </dl>
+
+    <h3>13.3 — تحلیل و طراحی</h3>
+    <dl>
+      <dt><code>ETABS</code></dt>
+      <dd>مدل‌سازی همان ساختمان: <code>Grids</code>، <code>Materials</code>، <code>Sections</code>، <code>Load Cases &amp; Combinations</code>، اجرای <code>Analysis</code> — و مهم‌تر از همه: <b>مقایسه‌ی خروجی نرم‌افزار با محاسبات دستی خودت</b> از فازهای قبل.</dd>
+      <dt><code>SAFE</code></dt>
+      <dd>مدل‌سازی <code>Slab</code> و <code>Pad Foundation</code> پروژه و مقایسه با طراحی دستی Phase 10.</dd>
+      <dt>نرم‌افزارهای رایج دیگر UK</dt>
+      <dd>آشنایی اسمی با <code>Tekla Structural Designer</code>، <code>MasterSeries</code>، <code>Robot</code> — برای Interview کافی است بدانی چه هستند.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Software Portfolio Pack:</b> سه خروجی از یک ساختمان: (۱) <code>GA Drawing</code> از AutoCAD، (۲) مدل Revit + <code>GA Sheet</code> و <code>3D View</code>، (۳) مدل ETABS با یک صفحه <code>Hand Calc vs Software</code> — جمله‌ی طلایی Interview: «I verified the software output against my hand calculations».</p>
+      <p class="out">خروجی: <code>Package 12 — CAD Drawing + Revit Model + ETABS Verification</code> ⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P14 -->
+<section id="p14" class="phase plus">
+  <div class="phase-head"><span class="pnum">PHASE 14</span><h2>Python for Structural Engineers ⭐</h2><span class="tag plus">مزیت</span></div>
+  <div class="phase-body">
+    <p class="why"><b>جداکننده‌ی تو از بقیه.</b> یک <code>Portfolio</code> با پروژه‌های Python تو را از ۹۰٪ متقاضی‌ها متمایز می‌کند — و همزمان تمام درس‌های قبلی را مرور می‌کنی.</p>
+
+    <h3>14.1 — مبانی Python</h3>
+    <dl>
+      <dt><code>Variables</code>، <code>Functions</code>، <code>Loops</code> + کتابخانه‌ها</dt>
+      <dd>از صفر مطلق + <code>NumPy</code> برای محاسبات، <code>Matplotlib</code> برای نمودار، آشنایی با <code>Pandas</code>.</dd>
+    </dl>
+
+    <h3>14.2 — پروژه‌های سازه‌ای</h3>
+    <dl>
+      <dt>پروژه‌های شروع</dt>
+      <dd><code>Unit Converter</code>، <code>Load Calculator</code>، <code>Support Reaction Calculator</code>.</dd>
+      <dt>پروژه‌ی اصلی</dt>
+      <dd><code>SFD/BMD Generator</code> + <code>Deflection Calculator</code> — ابزاری که نمودار هر تیری را رسم می‌کند.</dd>
+      <dt>پروژه‌های تکمیلی</dt>
+      <dd><code>Section Properties Calculator</code> + اتوماسیون یک <code>Eurocode Check</code> (کنترل خمش تیر فولادی <code>EC3</code>).</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>GitHub Portfolio:</b> پروژه‌ی <code>SFD/BMD Generator</code> را با یک <code>README</code> حرفه‌ای (توضیح، نمونه خروجی، نحوه‌ی اجرا) روی <code>GitHub</code> منتشر می‌کنی و برای تیر پروژه‌ی تمرینی اجرا می‌کنی — خروجی Python باید با <code>Calc Package 02</code> دستی‌ات یکی باشد. لینک GitHub مستقیم در CV می‌نشیند.</p>
+      <p class="out">خروجی: <code>GitHub Repository — Beam Analysis Toolkit</code> ⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P15 -->
+<section id="p15" class="phase plus">
+  <div class="phase-head"><span class="pnum">PHASE 15</span><h2>Professional Practice (UK) — حرفه و صنعت</h2><span class="tag plus">مزیت</span></div>
+  <div class="phase-body">
+    <p class="why"><b>دانستن «صنعت» به اندازه‌ی «فرمول» مهم است</b> — مخصوصاً با <code>Career Gap</code>، حرف زدن از <code>IStructE</code> و <code>CDM</code> نشان می‌دهد جدی هستی.</p>
+
+    <h3>15.1 — مسیر حرفه‌ای</h3>
+    <dl>
+      <dt><code>IStructE</code>، <code>ICE</code> و مسیر <code>Chartership (CEng)</code></dt>
+      <dd>دو نهاد اصلی، تفاوت‌ها، <code>Graduate Membership</code> و مفهوم <code>IPD</code>.</dd>
+    </dl>
+
+    <h3>15.2 — صنعت ساخت UK</h3>
+    <dl>
+      <dt>نقش‌ها و <code>RIBA Plan of Work</code></dt>
+      <dd><code>Client</code>، <code>Architect</code>، <code>Contractor</code>، <code>QS</code> + مراحل <code>Stage 0–7</code> در حد شناخت.</dd>
+      <dt><code>CDM 2015</code>، <code>Building Regulations</code>، <code>Building Safety Act</code></dt>
+      <dd><code>Designer's Duties</code> (ایمنی ساخت در طراحی) و چارچوب قانونی — به‌خصوص بعد از <code>Grenfell</code>.</dd>
+    </dl>
+
+    <h3>15.3 — Construction Awareness (سبک — هر مورد ۲ تا ۳ ساعت)</h3>
+    <dl>
+      <dt><code>Buildability</code></dt>
+      <dd>آیا چیزی که طراحی کردی، واقعاً «قابل ساختن» است؟ — فاصله‌ی میلگردی که ویبراتور رد شود، تیری که با جرثقیل معمولی بلند شود. دیدگاهی که مهندس دفترنشین را از مهندس واقعی جدا می‌کند.</dd>
+      <dt><code>Site Awareness</code></dt>
+      <dd>آشنایی با فضای کارگاه: <code>PPE</code>، ترتیب اجرای اسکلت، نقش <code>Site Engineer</code> — تا در اولین <code>Site Visit</code> غریبه نباشی.</dd>
+      <dt><code>Temporary Works</code></dt>
+      <dd>سازه‌های موقت حین ساخت: <code>Propping</code>، <code>Formwork</code>، <code>Scaffolding</code> — در حد اینکه بدانی وجود دارند، چرا حیاتی‌اند و مسئولشان کیست (<code>TWC</code>).</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">تمرین عملی — خروجی قابل ارائه</div>
+      <p><b>Professional Development Plan:</b> یک برنامه‌ی یک‌صفحه‌ای به انگلیسی: کدام نهاد (<code>IStructE/ICE</code>)، چه مسیری تا <code>CEng</code>، و ۳ هدف حرفه‌ای سال اول. در Interview وقتی بپرسند <code>Where do you see yourself?</code>، جواب آماده و مستند داری.</p>
+      <p class="out">خروجی: <code>Document 13 — Professional Development Plan</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P16 CAPSTONE -->
+<section id="p16" class="phase cap">
+  <div class="phase-head"><span class="pnum">PHASE 16</span><h2>Capstone Project — پروژه‌ی جامع Portfolio 🏗</h2><span class="tag cap">پروژه‌ی نهایی</span></div>
+  <div class="phase-body">
+    <p class="why"><b>همه‌چیز در یک پروژه.</b> اینجا تمام قطعات پازل را روی یک ساختمان جدید (نه پروژه‌ی تمرینی!) از صفر تا صد اجرا می‌کنی — سندی که در CV می‌نویسی: <code>Independent structural design project of a two-storey commercial building to Eurocodes</code>. این دقیقاً همان «نشان بده که می‌توانی» است.</p>
+
+    <h3>16.1 — تعریف پروژه</h3>
+    <dl>
+      <dt>ساختمان اداری دو طبقه با <code>Steel Frame</code> و <code>RC Elements</code></dt>
+      <dd>پلان و کاربری را با هم تعریف می‌کنیم — کمی متفاوت از پروژه‌ی تمرینی تا واقعاً «خودت» طراحی کرده باشی.</dd>
+    </dl>
+
+    <h3>16.2 — اجرای کامل (به ترتیب فازهای یادگیری)</h3>
+    <dl>
+      <dt>قدم ۱: <code>Scheme &amp; Load Path</code></dt>
+      <dd>چیدمان سازه، انتخاب سیستم باربر ثقلی و جانبی + دیاگرام <code>Load Path</code>.</dd>
+      <dt>قدم ۲: <code>Loading &amp; Load Takedown (EC0/EC1)</code></dt>
+      <dd>بارگذاری کامل، ترکیبات <code>ULS/SLS</code> و جدول بار ستون‌ها تا پی.</dd>
+      <dt>قدم ۳: <code>Steel Design (EC3)</code></dt>
+      <dd>طراحی تیر و ستون بحرانی با تمام کنترل‌ها.</dd>
+      <dt>قدم ۴: <code>RC Design (EC2)</code></dt>
+      <dd>طراحی دال و یک عضو بتنی + میلگردگذاری.</dd>
+      <dt>قدم ۵: <code>Stability Statement</code></dt>
+      <dd>سیستم جانبی، <code>Robustness</code> و <code>Consequence Class</code>.</dd>
+      <dt>قدم ۶: <code>Foundation Design (EC7)</code></dt>
+      <dd>طراحی <code>Pad Foundation</code> ستون بحرانی.</dd>
+      <dt>قدم ۷: <code>Drawings &amp; Model</code></dt>
+      <dd><code>GA Drawing</code> در AutoCAD + مدل <code>Revit</code> با <code>3D View</code> + مدل تحلیلی <code>ETABS</code> برای صحت‌سنجی.</dd>
+      <dt>قدم ۸: <code>Python Verification</code></dt>
+      <dd>صحت‌سنجی <code>SFD/BMD</code> تیر اصلی با ابزار GitHub خودت.</dd>
+    </dl>
+
+    <h3>16.3 — مستندسازی نهایی</h3>
+    <dl>
+      <dt><code>Design Report</code> نهایی</dt>
+      <dd>همه‌چیز در یک گزارش <code>PDF</code> حرفه‌ای با فهرست، مقدمه، روش، محاسبات، نقشه‌ها و نتیجه‌گیری — به سبک گزارش‌های واقعی <code>Consultancy</code>.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">خروجی نهایی — ستاره‌ی رزومه</div>
+      <p><b>Capstone Design Report:</b> یک پکیج کامل: گزارش طراحی <code>PDF</code> (~۲۰–۳۰ صفحه) + نقشه‌ها + تصاویر مدل Revit/ETABS + لینک GitHub. در Interview به‌جای «بلدم»، این را روی میز می‌گذاری. همین یک سند، جواب <code>Career Gap</code> هم هست: «در این مدت، این را ساختم.»</p>
+      <p class="out">خروجی: <code>Capstone Package — Full Building Design Report</code> ⭐⭐⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== P17 -->
+<section id="p17" class="phase">
+  <div class="phase-head"><span class="pnum">PHASE 17</span><h2>Career Preparation &amp; Interview — آماده‌سازی نهایی</h2><span class="tag core">هسته</span></div>
+  <div class="phase-body">
+    <p class="why"><b>مقصد نهایی.</b> حالا که <code>Portfolio</code> واقعی داری، این فاز آن را به «پیشنهاد شغلی» تبدیل می‌کند.</p>
+
+    <h3>17.1 — اسناد اپلای</h3>
+    <dl>
+      <dt><code>CV</code> و <code>Cover Letter</code></dt>
+      <dd>ساختار CV مخصوص Graduate در UK + استراتژی پوشش <code>Career Gap</code> با Capstone و پروژه‌های Python + نامه‌ی شخصی‌سازی‌شده برای هر شرکت.</dd>
+      <dt><code>LinkedIn</code> و <code>Portfolio</code></dt>
+      <dd>پروفایل حرفه‌ای + چیدمان نهایی همه‌ی خروجی‌های ۱۷ فاز در یک Portfolio منسجم.</dd>
+    </dl>
+
+    <h3>17.2 — استراتژی اپلای</h3>
+    <dl>
+      <dt><code>Graduate Schemes</code>، اپلای مستقیم، <code>Internships</code>، <code>Volunteering</code></dt>
+      <dd>شرکت‌های بزرگ (<code>Arup</code>، <code>WSP</code>، <code>AECOM</code>) در برابر شرکت‌های کوچک — مزایا، زمان‌بندی و مسیرهای جایگزین برای شکستن قفل تجربه.</dd>
+    </dl>
+
+    <h3>17.3 — مصاحبه</h3>
+    <dl>
+      <dt><code>Technical Interview Questions</code></dt>
+      <dd>بانک سؤال‌های فنی (از <code>Load Path</code> تا <code>LTB</code>) + تمرین جواب شفاهی با تکیه بر خروجی‌های خودت.</dd>
+      <dt><code>Competency Questions (STAR)</code> و <code>Assessment Centres</code></dt>
+      <dd>سؤال‌های رفتاری با ساختار <code>Situation–Task–Action–Result</code> + آمادگی برای <code>Group Exercise</code> و <code>Presentation</code>.</dd>
+      <dt><code>Mock Interview</code></dt>
+      <dd>شبیه‌سازی کامل مصاحبه با من — فنی و رفتاری — قبل از مصاحبه‌ی واقعی.</dd>
+    </dl>
+
+    <div class="deliver">
+      <div class="deliver-title">خروجی نهایی</div>
+      <p><b>Application Pack:</b> CV نهایی + Cover Letter قالب + پروفایل LinkedIn + Portfolio مرتب‌شده + گزارش Mock Interview با نقاط قوت و ضعف. با این پکیج، دکمه‌ی <code>Apply</code> را با اعتمادبه‌نفس می‌زنی.</p>
+      <p class="out">خروجی: <code>Complete Application Pack</code> — آماده‌ی اپلای 🎯</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== جمع‌بندی -->
+<section class="summary">
+  <h2>◆ منطق نسخه‌ی عملی — «نشان بده، نگو»</h2>
+  <p><b>یک ساختمان، یک مسیر:</b> از Phase 0 یک «پروژه‌ی تمرینی» تعریف می‌کنیم و همه‌ی تمرین‌ها روی همان انجام می‌شود — بارگذاری‌اش را در P6 حساب می‌کنی، فولادش را در P7 و بتنش را در P8 طراحی می‌کنی، پی‌اش را در P10 می‌سازی و در P13 مدلش می‌کنی. یادگیری تکه‌تکه نیست؛ یک داستان پیوسته است.</p>
+  <p><b>خروجی‌محور:</b> پایان هر فاز = <code>Quiz</code> + یک سند قابل ارائه (<code>Calc Package</code>، <code>Report</code>، <code>Drawing</code> یا <code>Model</code>). در پایان مسیر، به‌جای «ادعا»، یک پوشه‌ی Portfolio با ۱۳+ سند واقعی داری + یک <code>Capstone Design Report</code> که ساختمان کاملاً جدیدی را از صفر تا صد پوشش می‌دهد.</p>
+  <p><b>همچنان «کافی»:</b> عمق مطالب همان سطح Graduate است — نه <code>Dynamic Analysis</code>، نه <code>Prestressed</code>، نه <code>Seismic</code> عمیق. فقط حالا همان مطالب، به‌جای تئوریِ خالی، به خروجی ختم می‌شوند.</p>
+</section>
+
+<footer>GRADUATE STRUCTURAL ENGINEER ROADMAP · REV E · PRACTICAL EDITION · SHEET 1 OF 1</footer>
+</div>
+</body>
+</html>
